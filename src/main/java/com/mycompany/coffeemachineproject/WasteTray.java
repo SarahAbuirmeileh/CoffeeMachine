@@ -1,24 +1,26 @@
-package com.mycompany.coffeemachineProject;
+package com.mycompany.coffeemachineproject;
 
 /**
  *
  * @author ساره
  */
 public class WasteTray {
-    private int levle;
+    private int level;
     private int capacity;
 
+    // execption
+    
     public WasteTray() {
-        setLevle(0);
+        setLevel(0);
         setCapacity(20);
     }
 
-    public int getLevle() {
-        return levle;
+    public int getLevel() {
+        return level;
     }
 
-    public void setLevle(int levle) {
-        this.levle = levle;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getCapacity() {
@@ -30,7 +32,7 @@ public class WasteTray {
     }
     
     public void clean(){
-        setLevle(0);
+        setLevel(0);
     }
     
 }

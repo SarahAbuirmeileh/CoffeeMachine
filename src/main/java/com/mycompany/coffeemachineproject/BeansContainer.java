@@ -1,4 +1,6 @@
-package com.mycompany.coffeemachineProject;
+package com.mycompany.coffeemachineproject;
+
+import com.mycompany.coffeemachineproject.Exception.BeansExceededCapacityException;
 
 /**
  *
@@ -18,7 +20,7 @@ public class BeansContainer extends Container {
     }
 
     public BeansContainer(double arabicaPercentage, double robustaPercentage) {
-        setCapacity(500);
+        this.capacity=500;
         setArabicaPercentage(arabicaPercentage);
         setRobustaPercentage(robustaPercentage);
     }
@@ -40,17 +42,26 @@ public class BeansContainer extends Container {
     }
     
     @Override
-    public boolean take(double amount) {
-        return true;
+    public boolean take(int amount) {
+        if (amount < getLevel()){
+            setLevel(getLevel()-amount);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public String getInfo() {
-        return "";
+        return "Beans container : beans level = " + getLevel() + 
+               ", Arabica Percentage = " + getArabicaPercentage()* 100 + "% , " +
+                ", Robusta Percentage = " + getRobustaPercentage()* 100 + "% , ";
     }
 
     @Override
-    public void fill() {
-        this.levle = this.capacity;
+    public void fill(int amount) throws BeansExceededCapacityException {
+        if (getLevel()+amount > getCapacity())
+            throw new BeansExceededCapacityException();
+        else
+            setLevel(getLevel()+amount);
     }
 }

@@ -1,10 +1,13 @@
-package com.mycompany.coffeemachineProject;
+package com.mycompany.coffeemachineproject;
+
+import com.mycompany.coffeemachineproject.Exception.*;
 
 /**
  *
  * @author ساره
  */
 public class CoffeeMachine {
+
     private WaterCntainer water;
     private BeansContainer beans;
     private Grind grind;
@@ -51,4 +54,45 @@ public class CoffeeMachine {
         this.logger = logger;
     }
 
+    public void start() throws WastedTrayException, EmptyBeansException, EmptyWaterException {
+       
+        if (wasteTray.getLevel()== wasteTray.getCapacity()){
+            throw new WastedTrayException();
+        }
+        
+        if (beans.getLevel()==0){
+            throw new EmptyBeansException();
+        }
+        
+        if (water.getLevel()==0){
+            throw new EmptyWaterException();
+        }
+    }
+
+    public void brewer(int coffeeChoice) throws  WastedTrayException, OutOfBeansException, OutOfWaterException{
+        
+        if (wasteTray.getLevel()== wasteTray.getCapacity()){
+            throw new WastedTrayException();
+        }
+        
+        boolean beansEnough = beans.take(7 * coffeeChoice);
+        if (!beansEnough) {
+            throw new OutOfBeansException();
+        }
+
+        boolean waterEnough = false;
+        switch (coffeeChoice) {
+            case 1, 2 ->
+                waterEnough = water.take(30 * coffeeChoice);
+            case 3 -> 
+                waterEnough = water.take(170);
+            case 4 ->
+                waterEnough = water.take(220);
+        }
+        if (!waterEnough){
+            throw new OutOfWaterException();
+        }
+        
+    }
 }
+

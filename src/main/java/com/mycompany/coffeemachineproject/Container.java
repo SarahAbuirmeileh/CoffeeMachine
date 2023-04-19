@@ -1,4 +1,4 @@
-package com.mycompany.coffeemachineProject;
+package com.mycompany.coffeemachineproject;
 
 /**
  *
@@ -7,10 +7,10 @@ package com.mycompany.coffeemachineProject;
 public abstract class Container {
     
     int capacity;
-    int levle;
+    int level;
     
     public Container(){
-        this.levle =0;
+        this.level =0;
     }
     
     public int getCapacity() {
@@ -21,15 +21,15 @@ public abstract class Container {
         this.capacity = capacity;
     }
 
-    public int getLevle() {
-        return levle;
+    public int getLevel() {
+        return level;
     }
 
-    public void setLevle(int levle) {
-        this.levle = levle;
+    public void setLevel(int level) {
+        this.level = level;
     }
     
-    public abstract boolean take(double amount);
+    public abstract boolean take(int amount);
     public abstract String getInfo();
-    public abstract void fill();
+    public abstract void fill(int amount) throws Exception;
 }

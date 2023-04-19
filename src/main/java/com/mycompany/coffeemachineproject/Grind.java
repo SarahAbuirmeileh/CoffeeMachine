@@ -1,10 +1,11 @@
-package com.mycompany.coffeemachineProject;
+package com.mycompany.coffeemachineproject;
 
 /**
  *
  * @author ساره
  */
 public class Grind {
+    
     private  int gringLevle;
 
     public int getGringLevle() {
@@ -15,4 +16,7 @@ public class Grind {
         this.gringLevle = gringLevle;
     }
     
+    public void grinding(int gringLevle ){
+        
+    }
 }

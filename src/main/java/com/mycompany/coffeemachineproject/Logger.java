@@ -1,4 +1,4 @@
-package com.mycompany.coffeemachineProject;
+package com.mycompany.coffeemachineproject;
 
 /**
  *
