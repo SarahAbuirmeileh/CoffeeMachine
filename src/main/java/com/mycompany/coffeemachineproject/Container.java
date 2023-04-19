@@ -6,8 +6,8 @@ package com.mycompany.coffeemachineproject;
  */
 public abstract class Container {
     
-    int capacity;
-    int level;
+    protected int capacity;
+    protected int level;
     
     public Container(){
         this.level =0;

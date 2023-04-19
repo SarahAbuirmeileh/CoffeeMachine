@@ -14,6 +14,13 @@ public class CoffeeMachine {
     private WasteTray wasteTray;
     private Logger logger;
 
+    public CoffeeMachine() {
+        this.beans = new BeansContainer();
+        this.grind = new Grind();
+        this.wasteTray = new WasteTray();
+        this.water = new WaterCntainer();
+    }
+    
     public WaterCntainer getWater() {
         return water;
     }
@@ -71,7 +78,7 @@ public class CoffeeMachine {
 
     public void brewer(int coffeeChoice) throws  WastedTrayException, OutOfBeansException, OutOfWaterException{
         
-        if (wasteTray.getLevel()== wasteTray.getCapacity()){
+        if (this.wasteTray.getLevel()== this.wasteTray.getCapacity()){
             throw new WastedTrayException();
         }
         

@@ -1,5 +1,7 @@
 package com.mycompany.coffeemachineproject;
 
+import java.util.Scanner;
+
 /**
  *
  * @author ساره
@@ -18,9 +20,15 @@ public class WasteTray {
     public int getLevel() {
         return level;
     }
-
+    
+    Scanner input = new Scanner(System.in);
     public void setLevel(int level) {
-        this.level = level;
+        if (level >=0 && level <= capacity)
+            this.level = level;
+        else {
+            System.out.println("Invalid level, try again: ");
+            setLevel(input.nextInt());
+        }
     }
 
     public int getCapacity() {

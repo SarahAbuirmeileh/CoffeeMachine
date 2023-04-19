@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class CoffeeMachineProject {
 
-    public static void main(String[] args) throws WastedTrayException, EmptyBeansException, WaterExceededCapacityException {
+    public static void main(String[] args) throws WaterExceededCapacityException, BeansExceededCapacityException  {
 
         Scanner input = new Scanner(System.in);
         CoffeeMachine cm = new CoffeeMachine();
@@ -21,7 +21,7 @@ public class CoffeeMachineProject {
                       4. Double Americano
                       5. Turn off the machine
                       Enter your choice:""";
-        
+    
         boolean emptyWater = false;
         boolean emptyBeans = false;
         try{
@@ -48,8 +48,15 @@ public class CoffeeMachineProject {
                 cm.getWater().fill(input.nextInt());
             }
             catch (WaterExceededCapacityException ex){
+                int amount , shouldAdd = cm.getWater().getCapacity() - cm.getWater().getLevel();
                 System.out.println(ex.getMessage());
-                System.out.println("Add less amount of water ");
+                System.out.println("Add water less than " + shouldAdd + ": ");
+                amount =input.nextInt();
+                while (amount<0 || amount >shouldAdd){
+                    System.out.print("Try again: ");
+                    amount=input.nextInt();
+                }
+                cm.getWater().fill(amount);
             }   
         }
         if (emptyBeans){
@@ -58,8 +65,18 @@ public class CoffeeMachineProject {
                 cm.getBeans().fill(input.nextInt());
             }
             catch (BeansExceededCapacityException ex){
+                int amount, shouldAdd=cm.getBeans().getCapacity()-cm.getBeans().getLevel();
                 System.out.println(ex.getMessage());
-                System.out.println("Add less amount of beans ");
+                System.out.println("Add beans less than " + shouldAdd+ ": ");
+                amount =input.nextInt();
+                while (amount<0 || amount >shouldAdd){
+                    System.out.print("Try again: ");
+                    amount=input.nextInt();
+                }
+                cm.getBeans().fill(amount);
+                System.out.println("Enter the Arabica Percentage % and Robusta Percentage % : ");
+                cm.getBeans().setArabicaPercentage(input.nextInt());
+                cm.getBeans().setArabicaPercentage(input.nextInt());                
             }   
         }
         
@@ -103,27 +120,42 @@ public class CoffeeMachineProject {
             }
             
             if (needWater){
-            System.out.println("Enter the water amount that you want to add measured in ml");
-            try{
-                cm.getWater().fill(input.nextInt());
+                System.out.println("Enter the water amount that you want to add measured in ml");
+                try{
+                    cm.getWater().fill(input.nextInt());
+                }
+                catch (WaterExceededCapacityException ex){
+                    int amount , shouldAdd = cm.getWater().getCapacity() - cm.getWater().getLevel();
+                    System.out.println(ex.getMessage());
+                    System.out.println("Add water less than " + shouldAdd + ": ");
+                    amount =input.nextInt();
+                    while (amount<0 || amount >shouldAdd){
+                        System.out.print("Try again: ");
+                        amount=input.nextInt();
+                    }
+                    cm.getWater().fill(amount);
+                 }   
             }
-            catch (WaterExceededCapacityException ex){
-                System.out.println(ex.getMessage());
-                System.out.println("Add less amount of water ");
-            }   
-        }
             if (needBeans){
                 System.out.println("Enter the beans amount that you want to add measured in gram");
                 try{
-                    cm.getBeans().fill(input.nextInt());
+                cm.getBeans().fill(input.nextInt());
                 }
                 catch (BeansExceededCapacityException ex){
+                    int amount, shouldAdd=cm.getBeans().getCapacity()-cm.getBeans().getLevel();
                     System.out.println(ex.getMessage());
-                    System.out.println("Add less amount of beans ");
-                }   
+                    System.out.println("Add beans less than " + shouldAdd+ ": ");
+                    amount =input.nextInt();
+                    while (amount<0 || amount >shouldAdd){
+                        System.out.print("Try again: ");
+                        amount=input.nextInt();
+                    }
+                    cm.getBeans().fill(amount);
+                    System.out.println("Enter the Arabica Percentage % and Robusta Percentage % : ");
+                    cm.getBeans().setArabicaPercentage(input.nextInt());
+                    cm.getBeans().setArabicaPercentage(input.nextInt()); 
+                }  
             }
-
-        }while (true);
-        
+        }while (true); 
     }
 }
