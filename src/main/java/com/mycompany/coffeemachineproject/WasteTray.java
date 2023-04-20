@@ -8,13 +8,12 @@ import java.util.Scanner;
  */
 public class WasteTray {
     private int level;
-    private int capacity;
+    private final int capacity=20;
 
     // execption
     
     public WasteTray() {
         setLevel(0);
-        setCapacity(20);
     }
 
     public int getLevel() {
@@ -22,12 +21,15 @@ public class WasteTray {
     }
     
     Scanner input = new Scanner(System.in);
+
     public void setLevel(int level) {
-        if (level >=0 && level <= capacity)
+        if (level >= 0 && level <= capacity) {
             this.level = level;
-        else {
-            System.out.println("Invalid level, try again: ");
-            setLevel(input.nextInt());
+        } else {
+            do {
+                System.out.println("Invalid level, try again: ");
+                setLevel(input.nextInt());
+            } while (level < 0 || level > capacity);
         }
     }
 
@@ -35,12 +37,8 @@ public class WasteTray {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-    
-    public void clean(){
+    public void clean() {
         setLevel(0);
     }
-    
+
 }

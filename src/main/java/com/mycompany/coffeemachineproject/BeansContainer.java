@@ -1,6 +1,7 @@
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.BeansExceededCapacityException;
+import java.util.Scanner;
 
 /**
  *
@@ -29,8 +30,17 @@ public class BeansContainer extends Container {
         return arabicaPercentage;
     }
 
+    Scanner input = new Scanner(System.in);
+
     public void setArabicaPercentage(double arabicaPercentage) {
-        this.arabicaPercentage = arabicaPercentage/100;
+        if (arabicaPercentage >= 0 && arabicaPercentage <= 100) {
+            this.arabicaPercentage = arabicaPercentage / 100;
+        } else {
+            do {
+                System.out.println("Enter a number in range 0 to 100");
+                setArabicaPercentage(input.nextInt());
+            } while (arabicaPercentage < 0 || arabicaPercentage > 100);
+        }
     }
 
     public double getRobustaPercentage() {
@@ -38,7 +48,14 @@ public class BeansContainer extends Container {
     }
 
     public void setRobustaPercentage(double robustaPercentage) {
-        this.robustaPercentage = robustaPercentage/100;
+        if (robustaPercentage >= 0 && robustaPercentage <= 100) {
+            this.robustaPercentage = robustaPercentage / 100;
+        } else {
+            do {
+                System.out.println("Enter a nnumber in range 0 to 100");
+                setRobustaPercentage(input.nextInt());
+            } while (robustaPercentage < 0 || robustaPercentage > 100);
+        }
     }
     
     @Override
