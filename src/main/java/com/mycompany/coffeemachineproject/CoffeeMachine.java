@@ -63,7 +63,7 @@ public class CoffeeMachine {
 
     public void start() throws WastedTrayException, EmptyBeansException, EmptyWaterException {
        
-        if (wasteTray.getLevel()== wasteTray.getCapacity()){
+        if (WasteTray.level== wasteTray.getCapacity()){
             throw new WastedTrayException();
         }
         
@@ -78,7 +78,7 @@ public class CoffeeMachine {
 
     public void brewer(int coffeeChoice) throws  WastedTrayException, OutOfBeansException, OutOfWaterException{
         
-        if (this.wasteTray.getLevel()== this.wasteTray.getCapacity()){
+        if (WasteTray.level == this.wasteTray.getCapacity()){
             throw new WastedTrayException();
         }
         
@@ -99,7 +99,7 @@ public class CoffeeMachine {
         if (!waterEnough){
             throw new OutOfWaterException();
         }
-        
+        WasteTray.level++;
     }
 }
 

@@ -1,3 +1,4 @@
+
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
@@ -29,7 +30,11 @@ public class CoffeeMachineProject {
         }
         catch (WastedTrayException e){
             System.out.println(e.getMessage());
-            cm.getWasteTray().clean();
+            System.out.println("Enter 1 if you clean the  wasted tray, other wise the machine will turn off: ");
+            if (input.nextInt() == 1)
+                cm.getWasteTray().clean();
+            else 
+                System.exit(0);
         }
         catch (EmptyBeansException e){
             System.out.println(e.getMessage());
@@ -108,7 +113,11 @@ public class CoffeeMachineProject {
             }
             catch (WastedTrayException e){
                 System.out.println(e.getMessage());
-                cm.getWasteTray().clean();
+                System.out.println("Enter 1 if you clean the  wasted tray, other wise the machine will turn off: ");
+                if (input.nextInt() == 1)
+                    cm.getWasteTray().clean();
+                else 
+                    System.exit(0);
             }
             catch (OutOfBeansException e){
                 System.out.println(e.getMessage());
