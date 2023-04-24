@@ -53,6 +53,7 @@ public class CoffeeMachineProject {
             }
             catch (InputMismatchException e){
                 System.out.println(e.getMessage());
+        
                 continue;
             }
             
