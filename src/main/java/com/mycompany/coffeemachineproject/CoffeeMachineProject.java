@@ -1,4 +1,3 @@
-
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
@@ -11,7 +10,7 @@ import java.util.Scanner;
  */
 public class CoffeeMachineProject {
 
-    public static void main(String[] args) throws WaterExceededCapacityException, BeansExceededCapacityException  {
+    public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         CoffeeMachine cm = new CoffeeMachine();
@@ -22,9 +21,7 @@ public class CoffeeMachineProject {
                       4. Double Americano
                       5. Turn off the machine
                       Enter your choice:""";
-    
-        boolean emptyWater = false;
-        boolean emptyBeans = false;
+        int waterAmount=0, beansAmount =0;
         try{
             cm.start();
         }
@@ -38,58 +35,18 @@ public class CoffeeMachineProject {
         }
         catch (EmptyBeansException e){
             System.out.println(e.getMessage());
-            emptyBeans = true;
+            CoffeeMachineProject.beansHandel(cm, beansAmount);
         }
         catch (EmptyWaterException e){
             System.out.println(e.getMessage());
-            emptyWater=true;
+            CoffeeMachineProject.waterHandel(cm, waterAmount);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        if (emptyWater){
-            System.out.println("Enter the water amount that you want to add measured in ml");
-            try{
-                cm.getWater().fill(input.nextInt());
-            }
-            catch (WaterExceededCapacityException ex){
-                int amount , shouldAdd = cm.getWater().getCapacity() - cm.getWater().getLevel();
-                System.out.println(ex.getMessage());
-                System.out.println("Add water less than " + shouldAdd + ": ");
-                amount =input.nextInt();
-                while (amount<0 || amount >shouldAdd){
-                    System.out.print("Try again: ");
-                    amount=input.nextInt();
-                }
-                cm.getWater().fill(amount);
-            }   
-        }
-        if (emptyBeans){
-            System.out.println("Enter the beans amount that you want to add measured in gram");
-            try{
-                cm.getBeans().fill(input.nextInt());
-            }
-            catch (BeansExceededCapacityException ex){
-                int amount, shouldAdd=cm.getBeans().getCapacity()-cm.getBeans().getLevel();
-                System.out.println(ex.getMessage());
-                System.out.println("Add beans less than " + shouldAdd+ ": ");
-                amount =input.nextInt();
-                while (amount<0 || amount >shouldAdd){
-                    System.out.print("Try again: ");
-                    amount=input.nextInt();
-                }
-                cm.getBeans().fill(amount);
-                System.out.println("Enter the Arabica Percentage % and Robusta Percentage % : ");
-                cm.getBeans().setArabicaPercentage(input.nextInt());
-                cm.getBeans().setArabicaPercentage(input.nextInt());                
-            }   
-        }
-        
+   
         int choice;       
         do{
-            boolean needWater = false;
-            boolean needBeans = false;
-            
             System.out.println(menu);
             try {
                 choice = input.nextInt();
@@ -121,50 +78,79 @@ public class CoffeeMachineProject {
             }
             catch (OutOfBeansException e){
                 System.out.println(e.getMessage());
-                needBeans = true;
+                CoffeeMachineProject.beansHandel(cm, beansAmount);
             }
             catch (OutOfWaterException e){
                 System.out.println(e.getMessage());
-                needWater = true;
+                CoffeeMachineProject.waterHandel(cm, waterAmount);
             }
+            WasteTray.level++;
             
-            if (needWater){
-                System.out.println("Enter the water amount that you want to add measured in ml");
-                try{
-                    cm.getWater().fill(input.nextInt());
-                }
-                catch (WaterExceededCapacityException ex){
-                    int amount , shouldAdd = cm.getWater().getCapacity() - cm.getWater().getLevel();
-                    System.out.println(ex.getMessage());
-                    System.out.println("Add water less than " + shouldAdd + ": ");
-                    amount =input.nextInt();
-                    while (amount<0 || amount >shouldAdd){
-                        System.out.print("Try again: ");
-                        amount=input.nextInt();
-                    }
-                    cm.getWater().fill(amount);
-                 }   
-            }
-            if (needBeans){
-                System.out.println("Enter the beans amount that you want to add measured in gram");
-                try{
-                cm.getBeans().fill(input.nextInt());
-                }
-                catch (BeansExceededCapacityException ex){
-                    int amount, shouldAdd=cm.getBeans().getCapacity()-cm.getBeans().getLevel();
-                    System.out.println(ex.getMessage());
-                    System.out.println("Add beans less than " + shouldAdd+ ": ");
-                    amount =input.nextInt();
-                    while (amount<0 || amount >shouldAdd){
-                        System.out.print("Try again: ");
-                        amount=input.nextInt();
-                    }
-                    cm.getBeans().fill(amount);
-                    System.out.println("Enter the Arabica Percentage % and Robusta Percentage % : ");
-                    cm.getBeans().setArabicaPercentage(input.nextInt());
-                    cm.getBeans().setArabicaPercentage(input.nextInt()); 
-                }  
-            }
         }while (true); 
+    }
+    
+    public static  void beansHandel(CoffeeMachine cm, int beansAmount ) {
+        Scanner input = new Scanner(System.in);
+        boolean excepationOccur;
+        System.out.println("Enter the beans amount that you want to add measured in gram : ");
+        do {
+            excepationOccur=false;
+            try {
+                beansAmount = input.nextInt();
+                if (beansAmount<0)
+                        throw new InvalidDataException();
+            }
+            catch (InputMismatchException e){
+                System.out.println(e.getMessage());
+                excepationOccur =true;
+                System.out.println("You have to enter a positave integer, try again: ");
+            }
+            catch (InvalidDataException ex){
+                   System.out.println(ex.getMessage());                    
+                    excepationOccur =true;
+               } 
+        }while (excepationOccur);
+
+        do {
+            excepationOccur=false;
+            try {
+                System.out.println("Enter the Arabica Percentage %: ");
+                cm.getBeans().setArabicaPercentage(input.nextInt());
+                System.out.println("Enter the Robusta Percentage %: ");
+                cm.getBeans().setRobustaPercentage(input.nextInt());
+            }
+            catch (InputMismatchException e){
+                System.out.println(e.getMessage());
+                excepationOccur =true;
+                System.out.println("You have to enter a positave integer, try again: ");
+            }
+            catch (InvalidDataException ex){
+                System.out.println(ex.getMessage());   
+                excepationOccur =true;
+            }
+        }while (excepationOccur);
+    }
+    
+        public static void waterHandel(CoffeeMachine cm, int waterAmount) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the water amount that you want to add measured in ml : ");
+        boolean excepationOccur;
+        do {
+            excepationOccur=false;
+            try {
+                waterAmount = input.nextInt();
+                if (waterAmount<0)
+                    throw new InvalidDataException();
+            }
+            catch (InputMismatchException e){
+                excepationOccur =true;
+                System.out.println(e.getMessage());
+                System.out.println("You have to enter an integer greater than zero, try again: ");
+            }
+            catch (InvalidDataException ex){
+                System.out.println(ex.getMessage());                    
+                excepationOccur =true;
+            }
+        }while (excepationOccur );
     }
 }

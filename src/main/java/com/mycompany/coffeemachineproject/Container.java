@@ -25,8 +25,12 @@ public abstract class Container {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public boolean setLevel(int level)  {
+        if (level <= this.capacity && level >= 0){
+             this.level = level;
+            return true;
+        }
+        return false ;
     }
     
     public abstract boolean take(int amount);

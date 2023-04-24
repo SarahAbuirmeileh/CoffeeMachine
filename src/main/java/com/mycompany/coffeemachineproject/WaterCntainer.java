@@ -30,10 +30,10 @@ public class WaterCntainer extends Container {
 
     @Override
     public void fill(int amount) throws WaterExceededCapacityException{
-        if (getLevel()+amount > getCapacity()){
+        if (this.getLevel()+amount > this.getCapacity()){
             throw new WaterExceededCapacityException();
         }else {
-            setLevel(getLevel() + amount);
+            this.setLevel(this.getLevel() + amount);
         }
     }
 }

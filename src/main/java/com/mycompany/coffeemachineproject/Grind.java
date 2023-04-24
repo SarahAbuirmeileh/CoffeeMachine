@@ -1,6 +1,6 @@
 package com.mycompany.coffeemachineproject;
 
-import java.util.Scanner;
+import com.mycompany.coffeemachineproject.Exception.InvalidDataException;
 
 /**
  *
@@ -13,17 +13,12 @@ public class Grind {
     public int getGringLevle() {
         return grindLevle;
     }
-    Scanner input = new Scanner(System.in);
 
-    public void setGringLevle(int grindLevle) {
-        if (grindLevle >= 1 && grindLevle <= 10) {
+    public void setGringLevle(int grindLevle) throws InvalidDataException {
+        if (grindLevle >= 1 && grindLevle <= 10) 
             this.grindLevle = grindLevle;
-        } else {
-            do {
-                System.out.println("Plz enter a number in range 1 to 10 ");
-                setGringLevle(input.nextInt());
-            } while (grindLevle < 1 || grindLevle > 10);
-        }
+        else 
+            throw new InvalidDataException();
     }
 
     public void grinding(int gringLevle ){
