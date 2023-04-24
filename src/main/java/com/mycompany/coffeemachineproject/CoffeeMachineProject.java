@@ -21,7 +21,10 @@ public class CoffeeMachineProject {
                       4. Double Americano
                       5. Turn off the machine
                       Enter your choice:""";
+        
+        
         int waterAmount=0, beansAmount =0;
+        boolean needWater = false, needBeans=false;
         try{
             cm.start();
         }
@@ -35,26 +38,59 @@ public class CoffeeMachineProject {
         }
         catch (EmptyBeansException e){
             System.out.println(e.getMessage());
-            CoffeeMachineProject.beansHandel(cm, beansAmount);
+            beansAmount=CoffeeMachineProject.beansHandel(cm);
+            needBeans=true;
         }
         catch (EmptyWaterException e){
             System.out.println(e.getMessage());
-            CoffeeMachineProject.waterHandel(cm, waterAmount);
+            waterAmount =CoffeeMachineProject.waterHandel(cm);
+            needWater=true;
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-   
-        int choice;       
+        boolean exceptionOccer = false;
+        if(needBeans){
+            exceptionOccer = false;
+            do {
+                try {
+                    cm.getBeans().fill(beansAmount);
+                }
+                catch(BeansExceededCapacityException e){
+                    System.out.println(e.getMessage());
+                    beansAmount =CoffeeMachineProject.beansHandel(cm);
+                    exceptionOccer = true;
+                }
+            }while (exceptionOccer);
+        }
+        if(needWater){
+            do {
+                exceptionOccer = false;
+                try {
+                    cm.getWater().fill(waterAmount);
+                }
+                catch(WaterExceededCapacityException e){
+                    System.out.println(e.getMessage());
+                    waterAmount =CoffeeMachineProject.waterHandel(cm);
+                    exceptionOccer = true;
+                }
+            }while (exceptionOccer);
+        }
+        int choice=0;       
         do{
+            needWater = false; needBeans=false;
             System.out.println(menu);
-            try {
-                choice = input.nextInt();
-            }
-            catch (InputMismatchException e){
-                System.out.println(e.getMessage());
-                continue;
-            }
+            do {
+                exceptionOccer=false;
+                try {
+                    choice = input.nextInt();
+                }
+                catch (InputMismatchException e){
+                    System.out.println(e.getMessage());
+                    System.out.println("Enter an integer: ");
+                    exceptionOccer=true;
+                }
+            }while(exceptionOccer);
             
             if (choice >5 || choice < 1){
                 System.out.println("Invalid choice");
@@ -78,18 +114,47 @@ public class CoffeeMachineProject {
             }
             catch (OutOfBeansException e){
                 System.out.println(e.getMessage());
-                CoffeeMachineProject.beansHandel(cm, beansAmount);
+                CoffeeMachineProject.beansHandel(cm);
             }
             catch (OutOfWaterException e){
                 System.out.println(e.getMessage());
-                CoffeeMachineProject.waterHandel(cm, waterAmount);
+                waterAmount = CoffeeMachineProject.waterHandel(cm);
             }
+        if(needBeans){
+            exceptionOccer = false;
+            do {
+                try {
+                    cm.getBeans().fill(beansAmount);
+                }
+                catch(BeansExceededCapacityException e){
+                    System.out.println(e.getMessage());
+                    beansAmount =CoffeeMachineProject.beansHandel(cm);
+                    exceptionOccer = true;
+                }
+            }while (exceptionOccer);
+        }
+        if(needWater){
+            do {
+                exceptionOccer = false;
+                try {
+                    cm.getWater().fill(waterAmount);
+                }
+                catch(WaterExceededCapacityException e){
+                    System.out.println(e.getMessage());
+                    waterAmount =CoffeeMachineProject.waterHandel(cm);
+                    exceptionOccer = true;
+                }
+            }while (exceptionOccer);
+        }
+            
             WasteTray.level++;
-            System.out.println("The caffeine amount in this cup in grams = " + cm.getBeans().getCaffeine(choice));
+            System.out.println("The caffeine amount in this cup in grams"
+                    + " = " + cm.getBeans().getCaffeine(choice));
         }while (true); 
     }
     
-    public static  void beansHandel(CoffeeMachine cm, int beansAmount ) {
+    public static  int beansHandel(CoffeeMachine cm ) {
+        int beansAmount=0;
         Scanner input = new Scanner(System.in);
         boolean excepationOccur;
         System.out.println("Enter the beans amount that you want to add measured in gram : ");
@@ -129,9 +194,11 @@ public class CoffeeMachineProject {
                 excepationOccur =true;
             }
         }while (excepationOccur);
+        return beansAmount;
     }
     
-        public static void waterHandel(CoffeeMachine cm, int waterAmount) {
+    public static int waterHandel(CoffeeMachine cm) {
+        int waterAmount=0;
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the water amount that you want to add measured in ml : ");
         boolean excepationOccur;
@@ -152,5 +219,6 @@ public class CoffeeMachineProject {
                 excepationOccur =true;
             }
         }while (excepationOccur );
+        return waterAmount;
     }
 }
