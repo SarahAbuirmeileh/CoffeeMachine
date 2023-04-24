@@ -85,7 +85,7 @@ public class CoffeeMachineProject {
                 CoffeeMachineProject.waterHandel(cm, waterAmount);
             }
             WasteTray.level++;
-            
+            System.out.println("The caffeine amount in this cup in grams = " + cm.getBeans().getCaffeine(choice));
         }while (true); 
     }
     

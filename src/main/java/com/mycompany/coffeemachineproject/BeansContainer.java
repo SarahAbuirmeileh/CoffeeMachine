@@ -72,4 +72,10 @@ public class BeansContainer extends Container {
             this.setLevel(this.getLevel() + amount);
         }
     }
+    
+    public double getCaffeine (int coffeeChoice){
+        int x= coffeeChoice%2; if (x==0) x+=2;
+        x*=7;
+        return x*getArabicaPercentage()*0.012 + x*getRobustaPercentage()*0.022;
+    }
 }

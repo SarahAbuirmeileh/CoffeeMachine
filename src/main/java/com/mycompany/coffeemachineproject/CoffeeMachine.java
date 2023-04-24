@@ -82,7 +82,8 @@ public class CoffeeMachine {
             throw new WastedTrayException();
         }
         
-        boolean beansEnough = beans.take(7 * coffeeChoice);
+        int x= coffeeChoice%2; if (x==0) x+=2;
+        boolean beansEnough = beans.take(7 * x);
         if (!beansEnough) {
             throw new OutOfBeansException();
         }
