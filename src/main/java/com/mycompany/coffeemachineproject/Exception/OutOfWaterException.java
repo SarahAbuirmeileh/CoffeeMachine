@@ -11,7 +11,7 @@ public class OutOfWaterException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Out of water, thee isn't enough water, you have to fill it";
+        return "Out of water, there isn't enough water, you have to fill it";
     }
     
     

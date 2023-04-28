@@ -1,18 +1,14 @@
 package com.mycompany.coffeemachineproject;
 
-/**
- *
- * @author ساره
- */
 public abstract class Container {
-    
+
     protected int capacity;
     protected int level;
-    
-    public Container(){
-        this.level =0;
+
+    public Container() {
+        this.level = 0;
     }
-    
+
     public int getCapacity() {
         return capacity;
     }
@@ -25,15 +21,17 @@ public abstract class Container {
         return level;
     }
 
-    public boolean setLevel(int level)  {
-        if (level <= this.capacity && level >= 0){
-             this.level = level;
+    public boolean setLevel(int level) {
+        if (level <= this.capacity && level >= 0) {
+            this.level = level;
             return true;
         }
-        return false ;
+        return false;
     }
-    
+
     public abstract boolean take(int amount);
+
     public abstract String getInfo();
+
     public abstract void fill(int amount) throws Exception;
 }

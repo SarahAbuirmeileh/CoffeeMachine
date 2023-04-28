@@ -2,10 +2,6 @@ package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
 
-/**
- *
- * @author ساره
- */
 public class CoffeeMachine {
 
     private WaterCntainer water;
@@ -20,7 +16,7 @@ public class CoffeeMachine {
         this.wasteTray = new WasteTray();
         this.water = new WaterCntainer();
     }
-    
+
     public WaterCntainer getWater() {
         return water;
     }
@@ -62,27 +58,30 @@ public class CoffeeMachine {
     }
 
     public void start() throws WastedTrayException, EmptyBeansException, EmptyWaterException {
-       
-        if (WasteTray.level== wasteTray.getCapacity()){
+
+        if (WasteTray.level == wasteTray.getCapacity()) {
             throw new WastedTrayException();
         }
-        
-        if (beans.getLevel()==0){
+
+        if (beans.getLevel() == 0) {
             throw new EmptyBeansException();
         }
-        
-        if (water.getLevel()==0){
+
+        if (water.getLevel() == 0) {
             throw new EmptyWaterException();
         }
     }
 
-    public void brewer(int coffeeChoice) throws  WastedTrayException, OutOfBeansException, OutOfWaterException{
-        
-        if (WasteTray.level == this.wasteTray.getCapacity()){
+    public void brewer(int coffeeChoice) throws WastedTrayException, OutOfBeansException, OutOfWaterException {
+
+        if (WasteTray.level == this.wasteTray.getCapacity()) {
             throw new WastedTrayException();
         }
-        
-        int x= coffeeChoice%2; if (x==0) x+=2;
+
+        int x = coffeeChoice % 2;
+        if (x == 0) {
+            x += 2;
+        }
         boolean beansEnough = beans.take(7 * x);
         if (!beansEnough) {
             throw new OutOfBeansException();
@@ -92,15 +91,14 @@ public class CoffeeMachine {
         switch (coffeeChoice) {
             case 1, 2 ->
                 waterEnough = water.take(30 * coffeeChoice);
-            case 3 -> 
+            case 3 ->
                 waterEnough = water.take(170);
             case 4 ->
                 waterEnough = water.take(220);
         }
-        if (!waterEnough){
+        if (!waterEnough) {
             throw new OutOfWaterException();
         }
         WasteTray.level++;
     }
 }
-

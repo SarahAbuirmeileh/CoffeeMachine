@@ -2,14 +2,9 @@ package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.WaterExceededCapacityException;
 
-/**
- *
- * @author ساره
- */
 public class WaterCntainer extends Container {
 
     // Water level measured in ml
-
     public WaterCntainer() {
         setCapacity(1000);
     }
@@ -20,7 +15,7 @@ public class WaterCntainer extends Container {
             setLevel(getLevel() - amount);
             return true;
         }
-        return false;    
+        return false;
     }
 
     @Override
@@ -29,10 +24,10 @@ public class WaterCntainer extends Container {
     }
 
     @Override
-    public void fill(int amount) throws WaterExceededCapacityException{
-        if (this.getLevel()+amount > this.getCapacity()){
+    public void fill(int amount) throws WaterExceededCapacityException {
+        if (this.getLevel() + amount > this.getCapacity()) {
             throw new WaterExceededCapacityException();
-        }else {
+        } else {
             this.setLevel(this.getLevel() + amount);
         }
     }

@@ -1,9 +1,6 @@
 package com.mycompany.coffeemachineproject.Exception;
 
-/**
- *
- * @author ساره
- */
+
 public class OutOfBeansException extends Exception{
 
     public OutOfBeansException() {
@@ -11,7 +8,7 @@ public class OutOfBeansException extends Exception{
 
     @Override
     public String getMessage() {
-        return "Out of beans, thee isn't enough beans, you have to fill it";
+        return "Out of beans, there isn't enough beans, you have to fill it";
     }
     
     

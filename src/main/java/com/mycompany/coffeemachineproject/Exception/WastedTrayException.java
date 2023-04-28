@@ -1,9 +1,5 @@
 package com.mycompany.coffeemachineproject.Exception;
 
-/**
- *
- * @author ساره
- */
 public class WastedTrayException extends Exception{
 
     public WastedTrayException() {

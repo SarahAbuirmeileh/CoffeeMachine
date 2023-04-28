@@ -1,15 +1,11 @@
 package com.mycompany.coffeemachineproject;
 
-/**
- *
- * @author ساره
- */
 public class WasteTray {
+
     static int level = 0;
     private int capacity;
 
     // execption
-    
     public WasteTray() {
         this.capacity = 20;
     }
@@ -21,9 +17,9 @@ public class WasteTray {
     public int getCapacity() {
         return capacity;
     }
-
+    
     public void clean() {
-        level=0;
+        level = 0;
     }
 
 }

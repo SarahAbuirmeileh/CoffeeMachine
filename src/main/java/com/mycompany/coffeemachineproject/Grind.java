@@ -2,26 +2,23 @@ package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.InvalidDataException;
 
-/**
- *
- * @author ساره
- */
 public class Grind {
-    
-    private  int grindLevle;
+
+    private int grindLevle;
 
     public int getGringLevle() {
         return grindLevle;
     }
 
     public void setGringLevle(int grindLevle) throws InvalidDataException {
-        if (grindLevle >= 1 && grindLevle <= 10) 
+        if (grindLevle >= 1 && grindLevle <= 10) {
             this.grindLevle = grindLevle;
-        else 
+        } else {
             throw new InvalidDataException();
+        }
     }
 
-    public void grinding(int gringLevle ){
-        
+    public void grinding(int gringLevle) {
+
     }
 }
