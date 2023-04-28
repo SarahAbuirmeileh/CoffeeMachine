@@ -17,7 +17,7 @@ public class BeansContainer extends Container {
     public BeansContainer(double arabicaPercentage, double robustaPercentage) throws InvalidDataException {
         this.capacity = 500;
         setArabicaPercentage(arabicaPercentage);
-//        setRobustaPercentage();
+        setRobustaPercentage(robustaPercentage);
     }
 
     public final void setArabicaPercentage(double arabicaPercentage) throws InvalidDataException {
@@ -32,15 +32,6 @@ public class BeansContainer extends Container {
         return arabicaPercentage;
     }
 
-//    public final void setRobustaPercentage() throws InvalidDataException{
-//        if (robustaPercentage >= 0 && robustaPercentage <= 100) 
-//            this.robustaPercentage = 100-(this.getArabicaPercentage()*100);
-//        else
-//            throw new InvalidDataException();
-//    }
-//    public double getRobustaPercentage() {
-//        return 100 - (this.getArabicaPercentage() * 100);
-//    }
     public final void setRobustaPercentage(double robustaPercentage) throws InvalidDataException {
         if (robustaPercentage >= 0 && robustaPercentage <= 100) {
             this.robustaPercentage = robustaPercentage / 100;
