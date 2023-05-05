@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class CoffeeMachineProject {
 
-    public static void main(String[] args) throws InvalidDataException {
+    public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         CoffeeMachine cm = new CoffeeMachine();
@@ -163,7 +163,6 @@ public class CoffeeMachineProject {
                 }
                 break;
             } catch (InputMismatchException e) {
-                System.out.println(e.getMessage());
                 System.out.println("You have to enter a positave integer, try again: ");
             
             } catch (InvalidDataException ex) {
@@ -181,7 +180,6 @@ public class CoffeeMachineProject {
                 cm.getBeans().setRobustaPercentage(100-arabicaPercentage);
                 break;
             } catch (InputMismatchException e) {
-                System.out.println(e.getMessage());
                 System.out.println("You have to enter a positave integer, try again: ");
             } catch (InvalidDataException ex) {
                 System.out.println(ex.getMessage() + ", must Enter number in range 0 to 100 ");
@@ -203,8 +201,6 @@ public class CoffeeMachineProject {
                 }
                 break;
             } catch (InputMismatchException e) {
-                
-                System.out.println(e.getMessage());
                 System.out.println("You have to enter an positive integer, try again: ");
             } catch (InvalidDataException ex) {
                 
