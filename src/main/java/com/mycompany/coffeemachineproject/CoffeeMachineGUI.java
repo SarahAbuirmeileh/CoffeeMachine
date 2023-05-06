@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.coffeemachineproject;
 
+import com.mycompany.coffeemachineproject.Exception.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,54 +9,13 @@ import javax.swing.JOptionPane;
  */
 public class CoffeeMachineGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CoffeeMachineGUI
-     */
-    final int maxWaterCapacity = 1000;
-    final int maxBeanCapacity = 500;
-    int waterLevel = 0;
-    int beanLevel = 0;
-    final int maxWastedTrayCapacity = 20;
-    int wastedTrayLevel = 0;
-
-    public void water(int amount) {
-        if (waterLevel < amount) {
-            int waterLevel1 = Integer.parseInt(JOptionPane.showInputDialog("there isn't enough water plz Enter the amount you want to add", true));
-            if ((waterLevel1 + waterLevel) > maxWaterCapacity) {
-                waterLevel -= waterLevel1;
-                waterLevel += Integer.parseInt(JOptionPane.showInputDialog("Now the level of water exceds the maximum capacity for water(1000L), try again", true));
-            } else {
-                waterLevel += waterLevel1;
-            }
-        }
-        waterLevel -= amount;
-    }
-
-    public void beans(int amount) {
-        if (beanLevel < amount) {
-            int beanLevel1 = Integer.parseInt(JOptionPane.showInputDialog("there isn't enough bean plz Enter the amount you want to add", true));
-            if ((beanLevel1 + beanLevel) > maxBeanCapacity) {
-                beanLevel -= beanLevel1;
-                beanLevel += Integer.parseInt(JOptionPane.showInputDialog("Now the level of beans exceds the maximum capacity for beans(500L), try again", true));
-            } else {
-                beanLevel += beanLevel1;
-            }
-        }
-        beanLevel -= amount;
-
-    }
-
-    public boolean wantClean() {
-        return maxWastedTrayCapacity == wastedTrayLevel;
-    }
-    public void grinding(int level){
-        
-    }
-    
+    CoffeeMachine cm = new CoffeeMachine();
 
     public CoffeeMachineGUI() {
         initComponents();
-        
+        // load the information from file about the containers, then pass them as paramerter to the cm
+        //CoffeeMachine cm = new CoffeeMachine(.....);
+        startMachine();
     }
 
     /**
@@ -233,10 +189,11 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
 
         grindLevelSlide.setMajorTickSpacing(1);
         grindLevelSlide.setMaximum(10);
+        grindLevelSlide.setMinimum(1);
         grindLevelSlide.setMinorTickSpacing(1);
         grindLevelSlide.setPaintLabels(true);
         grindLevelSlide.setPaintTicks(true);
-        grindLevelSlide.setValue(1);
+        grindLevelSlide.setValue(5);
 
         jLabel22.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
         jLabel22.setText("  Grinde level ");
@@ -329,66 +286,96 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
 
     private void sEspressoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sEspressoRadioButtonActionPerformed
         // TODO add your handling code here:
-        if (sEspressoRadioButton.isSelected()&& grindLevelSlide.getValue()!=0)
+        if (sEspressoRadioButton.isSelected())
             startButton.setEnabled(true);
     }//GEN-LAST:event_sEspressoRadioButtonActionPerformed
 
     private void dEspressoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dEspressoRadioButtonActionPerformed
-        if (dEspressoRadioButton.isSelected() && grindLevelSlide.getValue()!=0)
+        if (dEspressoRadioButton.isSelected())
             startButton.setEnabled(true);
     }//GEN-LAST:event_dEspressoRadioButtonActionPerformed
 
     private void sAmericanoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sAmericanoRadioButtonActionPerformed
-        if(sAmericanoRadioButton.isSelected() && grindLevelSlide.getValue()!=0)
+        if(sAmericanoRadioButton.isSelected())
             startButton.setEnabled(true);
     }//GEN-LAST:event_sAmericanoRadioButtonActionPerformed
 
     private void dAmericanoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dAmericanoRadioButtonActionPerformed
-        if(dAmericanoRadioButton.isSelected() && grindLevelSlide.getValue()!=0)
+        if(dAmericanoRadioButton.isSelected())
             startButton.setEnabled(true);
     }//GEN-LAST:event_dAmericanoRadioButtonActionPerformed
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
-      
-        if (wantClean()){
-            JOptionPane.showMessageDialog(null, "the wasted tray must be cleaning,"
-                    + "\n If you want to clean it click clean button, \n"
-                    + "Other wise you cannot make your coffee");
-            startButton.setEnabled(false);
+      int choice =0;
+        if(sEspressoRadioButton.isSelected()){
+            choice = 1;
+        } else if (dEspressoRadioButton.isSelected()){
+            choice =2;
+        }else if (sAmericanoRadioButton.isSelected()){
+            choice =3;
+        }else if(dAmericanoRadioButton.isSelected()){
+            choice = 4;
         }
-        
-        if (sEspressoRadioButton.isSelected()){
-            water(30);
-            beans(7);
-            wastedTrayLevel++;
-            grinding(grindLevelSlide.getValue());
+
+        boolean needWater = false, needBeans = false;
+        try{
+            cm.brewer(choice,grindLevelSlide.getValue());
         }
-        if (dEspressoRadioButton.isSelected()){
-            water(60);
-            beans(14);
-            wastedTrayLevel++;
-            grinding(grindLevelSlide.getValue());
+        catch (WastedTrayException e) {
+            JOptionPane.showMessageDialog(rootPane, """
+                the wasted tray must be cleaning,
+                If you want to clean it click the clean button,
+                Other wise you cannot make your coffee""");
+                startButton.setEnabled(false);
+            } catch (OutOfBeansException e) {
+                needBeans = true;
+            } catch (OutOfWaterException e) {
+                needWater = true;
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+
+            if (needBeans){
+                String beansAmount = JOptionPane.showInputDialog(rootPane, """
+                    There isn't enough\n
+                    Pleas enter the beans amount you want to add:""");
+                try{
+                    cm.getBeans().fill(Integer.parseInt(beansAmount));
+                }
+                catch (BeansExceededCapacityException e) {
+                    JOptionPane.showMessageDialog(rootPane, e.getMessage());
+                }
+            }
+            if (needWater){
+                String waterAmount = JOptionPane.showInputDialog(rootPane, """
+                    There isn't enough water\n
+                    Pleas enter the beans amount you want to add:""");
+                try{
+                    cm.getWater().fill(Integer.parseInt(waterAmount));
+                }
+                catch (WaterExceededCapacityException e) {
+                    JOptionPane.showMessageDialog(rootPane, e.getMessage());
+                }
+            }
+        try {
+            cm.getGrind().setGringLevle(grindLevelSlide.getValue());
+        } catch (InvalidDataException ex) {
+            
         }
-        if (sAmericanoRadioButton.isSelected()){
-            water(170);
-            beans(7);
-            wastedTrayLevel++;
-            grinding(grindLevelSlide.getValue());
-        }
-        if (dAmericanoRadioButton.isSelected()){
-            water(220);
-            beans(14);
-            wastedTrayLevel++;
-            grinding(grindLevelSlide.getValue());
-        }
+        cm.getGrind().grinding();
+        JOptionPane.showMessageDialog(rootPane,
+            "The coffee cup has been made successfully!!"
+            + "The caffeine amount in this cup in grams"
+            + " = " + cm.getBeans().getCaffeine(choice));
         
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
         // TODO add your handling code here:
         startButton.setEnabled(true);
-        wastedTrayLevel=0;
+        WasteTray.level=0;
     }//GEN-LAST:event_cleanButtonActionPerformed
 
     /**
@@ -447,4 +434,47 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton sEspressoRadioButton;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
+private void startMachine() {
+        
+        boolean needWater = false, needBeans = false;
+        try {
+            cm.start();
+        } catch (WastedTrayException e) {
+            JOptionPane.showMessageDialog(rootPane, """
+                                           the wasted tray must be cleaning, 
+                                           If you want to clean it click the clean button, 
+                                           Other wise you cannot make your coffee""");
+            startButton.setEnabled(false);
+        } catch (EmptyBeansException e) {
+           needBeans = true;
+        } catch (EmptyWaterException e) {
+           JOptionPane.showMessageDialog(rootPane, "The water container is empty");
+           needWater = true;
+        } catch (Exception e) {
+           JOptionPane.showMessageDialog(rootPane, e.getMessage());
+       }
+        
+        if (needBeans){
+            String beansAmount = JOptionPane.showInputDialog(rootPane, """
+                                                  The beans container is empty\n
+                                                  Pleas enter the beans amount you want to add:""");
+            try{
+                cm.getBeans().fill(Integer.parseInt(beansAmount));
+            }
+            catch (BeansExceededCapacityException e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+        }
+        if (needWater){
+            String waterAmount = JOptionPane.showInputDialog(rootPane, """
+                                                  The beans container is empty\n
+                                                  Pleas enter the beans amount you want to add:""");
+            try{
+                cm.getWater().fill(Integer.parseInt(waterAmount));
+            }
+            catch (WaterExceededCapacityException e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+        }
+    }
 }

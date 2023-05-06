@@ -1,6 +1,7 @@
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
+import java.util.logging.Level;
 
 public class CoffeeMachine {
 
@@ -70,7 +71,7 @@ public class CoffeeMachine {
         }
     }
 
-    public void brewer(int coffeeChoice) throws WastedTrayException, OutOfBeansException, OutOfWaterException {
+    public void brewer(int coffeeChoice, int grindLevel) throws WastedTrayException, OutOfBeansException, OutOfWaterException {
 
         if (WasteTray.level == this.wasteTray.getCapacity()) {
             throw new WastedTrayException();
@@ -94,6 +95,12 @@ public class CoffeeMachine {
         if (!waterEnough) {
             throw new OutOfWaterException();
         }
+        try {
+            grind.setGringLevle(grindLevel);
+        } catch (InvalidDataException ex) {
+           // we will set the value after being sure that is sutabile
+        }
+        grind.grinding();
         WasteTray.level++;
     }
 }

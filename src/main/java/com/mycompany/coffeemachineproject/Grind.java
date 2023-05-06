@@ -18,7 +18,7 @@ public class Grind {
         }
     }
 
-    public void grinding(int gringLevle) {
+    public void grinding() {
 
     }
 }

@@ -78,14 +78,14 @@ public class CoffeeMachineProject {
                 }
                 input.nextLine();
             } while (true);
-
+            int grindLevelInput =0;
             if (choice >= 1 && choice <= 4) {
                 System.out.println("Enter the grind level that you want: ");
                 do {
                     try {
-                        int gtindLevelInput = input.nextInt();
-                        cm.getGrind().setGringLevle(gtindLevelInput);
-                        cm.getGrind().grinding(gtindLevelInput);
+                        grindLevelInput = input.nextInt();
+                        cm.getGrind().setGringLevle(grindLevelInput);
+                        cm.getGrind().grinding();
                         break;
                     } catch (InvalidDataException e) {
                         System.out.println(e.getMessage() + ", you must enter a number in range 1 to 10, try again ");
@@ -104,7 +104,7 @@ public class CoffeeMachineProject {
                 System.exit(0);
             }
             try {
-                cm.brewer(choice);
+                cm.brewer(choice,  grindLevelInput);
             } catch (WastedTrayException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Enter 1 if you want to clean the  wasted tray, other wise the machine will turn off: ");
