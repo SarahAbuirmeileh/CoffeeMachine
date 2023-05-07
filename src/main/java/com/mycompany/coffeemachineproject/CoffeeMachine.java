@@ -58,17 +58,8 @@ public class CoffeeMachine {
         this.logger = logger;
     }
 
-    public void start() throws WastedTrayException, EmptyBeansException, EmptyWaterException {
-
-        if (WasteTray.level == wasteTray.getCapacity()) {
-            throw new WastedTrayException();
-        }
-        if (beans.getLevel() == 0) {
-            throw new EmptyBeansException();
-        }
-        if (water.getLevel() == 0) {
-            throw new EmptyWaterException();
-        }
+    public void start(){
+        
     }
 
     public void brewer(int coffeeChoice, int grindLevel) throws WastedTrayException, OutOfBeansException, OutOfWaterException {

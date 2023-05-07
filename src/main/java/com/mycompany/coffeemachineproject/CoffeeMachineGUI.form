@@ -437,6 +437,9 @@
         <Component class="javax.swing.JTextField" name="beansContanierText">
         </Component>
         <Component class="javax.swing.JTextField" name="waterContainerText">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="waterContainerTextActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="addBeans">
           <Properties>

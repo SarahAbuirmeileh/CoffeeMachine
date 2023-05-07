@@ -18,56 +18,9 @@ public class CoffeeMachineProject {
                       5. Turn off the machine
                       Enter your choice:""";
 
-        int waterAmount = 0, beansAmount = 0;
-        boolean needWater = false, needBeans = false;
-        try {
-            cm.start();
-        } catch (WastedTrayException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Enter 1 if you clean the  wasted tray, other wise the machine will turn off: ");
-            if (input.nextInt() == 1) {
-                cm.getWasteTray().clean();
-            } else {
-                System.exit(0);
-            }
-        } catch (EmptyBeansException e) {
-            System.out.println(e.getMessage());
-            beansAmount = CoffeeMachineProject.beansHandel(cm);
-            needBeans = true;
-        } catch (EmptyWaterException e) {
-            System.out.println(e.getMessage());
-            waterAmount = CoffeeMachineProject.waterHandel(cm);
-            needWater = true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        if (needBeans) {
-            do {
-                try {
-                    cm.getBeans().fill(beansAmount);
-                    break;
-                } catch (BeansExceededCapacityException e) {
-                    System.out.println(e.getMessage());
-                    beansAmount = CoffeeMachineProject.beansHandel(cm);
-                }
-            } while (true);
-        }
-        if (needWater) {
-            do {
-                try {
-                    cm.getWater().fill(waterAmount);
-                    break;
-                } catch (WaterExceededCapacityException e) {
-                    System.out.println(e.getMessage());
-                    waterAmount = CoffeeMachineProject.waterHandel(cm);
-                }
-            } while (true);
-        }
         int choice = 0;
         do {
-            needWater = false;
-            needBeans = false;
+            boolean needBeans = false, needWater = false;
             System.out.println(menu);
             do {
                 try {
@@ -101,8 +54,10 @@ public class CoffeeMachineProject {
                 continue;
             }
             if (choice == 5) {
+                // save the data to file
                 System.exit(0);
             }
+            int beansAmount =0, waterAmount=0;
             try {
                 cm.brewer(choice,  grindLevelInput);
             } catch (WastedTrayException e) {

@@ -14,7 +14,6 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         initComponents();
         // load the information from file about the containers, then pass them as paramerter to the cm
         //CoffeeMachine cm = new CoffeeMachine(.....);
-        startMachine();
     }
 
     /**
@@ -218,6 +217,12 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
         jLabel2.setText("Water Container");
 
+        waterContainerText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waterContainerTextActionPerformed(evt);
+            }
+        });
+
         addBeans.setText("Add Beans");
         addBeans.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,7 +359,6 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dAmericanoRadioButtonActionPerformed
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        // TODO add your handling code here:
       int choice =0;
         if(sEspressoRadioButton.isSelected()){
             choice = 1;
@@ -366,54 +370,29 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             choice = 4;
         }
 
-        boolean needWater = false, needBeans = false;
         try{
             cm.brewer(choice,grindLevelSlide.getValue());
         }
         catch (WastedTrayException e) {
-        JOptionPane.showMessageDialog(rootPane, """
+        JOptionPane.showMessageDialog(this, """
             the wasted tray must be cleaning,
             If you want to clean it click the clean button,
             Other wise you cannot make your coffee""");
             startButton.setEnabled(false);
         } catch (OutOfBeansException e) {
-            needBeans = true;
+            JOptionPane.showMessageDialog(this, "THere is no enough beans, pleas fill it");
+            startButton.setEnabled(false);
+            return;
         } catch (OutOfWaterException e) {
-            needWater = true;
+            JOptionPane.showMessageDialog(this, "THere is no enough water, pleas fill it");
+            startButton.setEnabled(false);
+            return;
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
-        if (needBeans){
-            do {
-                try{
-                    cm.getBeans().fill(beansHandel(cm));
-                    break;
-                }
-                catch (BeansExceededCapacityException e) {
-                    JOptionPane.showMessageDialog(rootPane, e.getMessage());
-                }
-            } while (true);    
-        }
-        if (needWater){
-            String waterAmount = JOptionPane.showInputDialog(rootPane, """
-                There isn't enough water\n
-                Pleas enter the beans amount you want to add:""");
-            try{
-                cm.getWater().fill(Integer.parseInt(waterAmount));
-            }
-            catch (WaterExceededCapacityException e) {
-                JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            }
-        }
-        try {
-            cm.getGrind().setGringLevle(grindLevelSlide.getValue());
-        } catch (InvalidDataException ex) {
-            
-        }
-        cm.getGrind().grinding();
-        JOptionPane.showMessageDialog(rootPane,
+        JOptionPane.showMessageDialog(this,
             "The coffee cup has been made successfully!!"
             + "The caffeine amount in this cup in grams"
             + " = " + cm.getBeans().getCaffeine(choice));
@@ -428,51 +407,69 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cleanButtonActionPerformed
 
     private void addBeansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBeansActionPerformed
-        // TODO add your handling code here:
         int beansAmount=0;
-        do {
-            try {
-                beansAmount=Integer.parseInt(beansContanierText.getText());
-                if (beansAmount < 0 || beansAmount > cm.getBeans().getCapacity()) {
-                    throw new InvalidDataException();
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("You have to enter a positave integer, try again: ");
-            } catch (InvalidDataException ex) {
-                System.out.println(ex.getMessage() +" must enter a positive number and not greater than the beans capacity ( "+cm.getBeans().getCapacity()+" ), Enter again");
-            }
-        } while (true);
         try {
-            cm.getWater().fill(beansAmount);
-        } catch (WaterExceededCapacityException ex) {
-            System.out.println("The beans you want to add exceeded tha beans container capacity");
+            beansAmount=Integer.parseInt(beansContanierText.getText());
+            if (beansAmount < 0) {
+                JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
+                startButton.setEnabled(false); beansContanierText.setText("");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
+            startButton.setEnabled(false);
+            return;
+        }finally{
+            beansContanierText.setText("");
         }
-
+        try {
+            cm.getBeans().fill(beansAmount);
+        } catch (BeansExceededCapacityException ex) {
+            JOptionPane.showMessageDialog(this,"The beans you want to add exceeded the beans container capacity"
+            + "You have to enter a positave integer not greater than " 
+            + (cm.getBeans().getCapacity()-cm.getBeans().getLevel()));
+            startButton.setEnabled(false);
+        }
+        finally{
+            beansContanierText.setText("");
+        }
+        startButton.setEnabled(true);
     }//GEN-LAST:event_addBeansActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        int waterAmount=0;
-        do {
-            try {
-                waterAmount=Integer.parseInt(beansContanierText.getText());
-                if (waterAmount < 0 || waterAmount > cm.getWater().getCapacity()) {
-                    throw new InvalidDataException();
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("You have to enter a positave integer, try again: ");
-            } catch (InvalidDataException ex) {
-                System.out.println(ex.getMessage() +" must enter a positive number and not greater than the water capacity ( "+cm.getWater().getCapacity()+" ), Enter again");
+            int waterAmount=0;
+        try {
+            waterAmount=Integer.parseInt(waterContainerText.getText());
+            if (waterAmount < 0) {
+                JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
+                startButton.setEnabled(false); waterContainerText.setText("");
+                return;
             }
-        } while (true);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
+            startButton.setEnabled(false);
+            return;
+        }
+        finally{
+            waterContainerText.setText("");
+        }
         try {
             cm.getWater().fill(waterAmount);
         } catch (WaterExceededCapacityException ex) {
-            System.out.println("The water you want to add exceeded tha water container capacity");
+            JOptionPane.showMessageDialog(this,"The water you want to add exceeded the water container capacity"
+            + "You have to enter a positave integer not greater than " 
+            + (cm.getWater().getCapacity()-cm.getWater().getLevel()));
+            startButton.setEnabled(false);
         }
+        finally{
+            waterContainerText.setText("");
+        }
+        startButton.setEnabled(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void waterContainerTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waterContainerTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_waterContainerTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -536,86 +533,4 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     private javax.swing.JButton startButton;
     private javax.swing.JTextField waterContainerText;
     // End of variables declaration//GEN-END:variables
-private void startMachine() {
-        
-        boolean needWater = false, needBeans = false;
-        try {
-            cm.start();
-        } catch (WastedTrayException e) {
-            JOptionPane.showMessageDialog(rootPane, """
-                                           the wasted tray must be cleaning, 
-                                           If you want to clean it click the clean button, 
-                                           Other wise you cannot make your coffee""");
-            startButton.setEnabled(false);
-        } catch (EmptyBeansException e) {
-           needBeans = true;
-        } catch (EmptyWaterException e) {
-           JOptionPane.showMessageDialog(rootPane, "The water container is empty");
-           needWater = true;
-        } catch (Exception e) {
-           JOptionPane.showMessageDialog(rootPane, e.getMessage());
-       }
-        
-        if (needBeans){
-            String beansAmount = JOptionPane.showInputDialog(rootPane, """
-                                                  The beans container is empty\n
-                                                  Pleas enter the beans amount you want to add:""");
-            try{
-                cm.getBeans().fill(Integer.parseInt(beansAmount));
-            }
-            catch (BeansExceededCapacityException e) {
-                JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            }
-        }
-        if (needWater){
-            String waterAmount = JOptionPane.showInputDialog(rootPane, """
-                                                  The beans container is empty\n
-                                                  Pleas enter the beans amount you want to add:""");
-            try{
-                cm.getWater().fill(Integer.parseInt(waterAmount));
-            }
-            catch (WaterExceededCapacityException e) {
-                JOptionPane.showMessageDialog(rootPane, e.getMessage());
-            }
-        }
-    }
-
-public int beansHandel(CoffeeMachine cm) {
-        int beansAmount = 0;
-        System.out.println("Enter the beans amount that you want to add measured in gram : ");
-        do {
-            try {
-                String beansAmountInput = 
-                JOptionPane.showInputDialog(rootPane, """
-                There isn't enough\n
-                Pleas enter the beans amount you want to add:""");
-//                beansContanierText.getText();
-                beansAmount = Integer.parseInt(beansAmountInput);
-                if (beansAmount < 0 || beansAmount > cm.getBeans().getCapacity()) {
-                    throw new InvalidDataException();
-                }
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("You have to enter a positave integer, try again: ");
-            } catch (InvalidDataException ex) {
-                System.out.println(ex.getMessage() +" must enter a positive number and not greater than the beans capacity ( "+cm.getBeans().getCapacity()+" ), Enter again");
-            }
-        } while (true);
-
-        do {
-            try {
-                String input = JOptionPane.showInputDialog(this,"Enter the Arabica Percentage %, an integer from 1 to 100: ");
-                double arabicaPercentage = Integer.parseInt(input);
-                cm.getBeans().setArabicaPercentage(arabicaPercentage);
-                JOptionPane.showMessageDialog(this, "So the Robusta Percentage %: " + (100 - arabicaPercentage) + "%");
-                cm.getBeans().setRobustaPercentage(100-arabicaPercentage);
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("You have to enter a positave integer, try again: ");
-            } catch (InvalidDataException ex) {
-                System.out.println(ex.getMessage() + ", must Enter number in range 0 to 100 ");
-            }
-        } while (true);
-        return beansAmount;
-    }
 }
