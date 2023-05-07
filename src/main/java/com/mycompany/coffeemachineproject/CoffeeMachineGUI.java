@@ -4,16 +4,17 @@ import com.mycompany.coffeemachineproject.Exception.*;
 import javax.swing.JOptionPane;
 
 public class CoffeeMachineGUI extends javax.swing.JFrame {
-
+    
     CoffeeMachine cm = new CoffeeMachine();
     LoggerDatabaise loggerDatabaise = new LoggerDatabaise();
-
+    
     public CoffeeMachineGUI() {
+        cm.stop();
         initComponents();
         cm = cm.start();
         cm.setLogger(loggerDatabaise);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -403,10 +404,10 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
             +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
         
-        sEspressoRadioButton.setEnabled(false);
-        dEspressoRadioButton.setEnabled(false);
-        sAmericanoRadioButton.setEnabled(false);
-        dAmericanoRadioButton.setEnabled(false);
+        sEspressoRadioButton.setSelected(false);
+        dEspressoRadioButton.setSelected(false);
+        sAmericanoRadioButton.setSelected(false);
+        dAmericanoRadioButton.setSelected(false);
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
