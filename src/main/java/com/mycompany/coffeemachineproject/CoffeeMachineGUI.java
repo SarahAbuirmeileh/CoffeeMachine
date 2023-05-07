@@ -1,7 +1,6 @@
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
-import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -14,6 +13,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         initComponents();
         // load the information from file about the containers, then pass them as paramerter to the cm
         //CoffeeMachine cm = new CoffeeMachine(.....);
+        
     }
 
     /**
