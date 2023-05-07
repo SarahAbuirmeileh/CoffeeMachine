@@ -1,11 +1,9 @@
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -25,15 +23,12 @@ public class CoffeeMachine {
         this.water = new WaterCntainer();
     }
 
-    public CoffeeMachine(WaterCntainer water, BeansContainer beans, WasteTray wasteTray) {
+    public CoffeeMachine(WaterCntainer water, BeansContainer beans, WasteTray wasteTray, Logger logger) {
         this.water = water;
         this.beans = beans;
         this.wasteTray = wasteTray;
-    }//safa
-
-    
-    
-    
+        this.logger=logger;
+    }
 
     public WaterCntainer getWater() {
         return water;
@@ -78,52 +73,45 @@ public class CoffeeMachine {
     public void stop(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/coffee_machine", "safa", "1234");
-            int a = this.beans.level, b = this.water.level, c = WasteTray.level;
-            String insertSql = "INSERT INTO objects_data (beans_amount,water_amount,wasted_tray) VALUES("+a+","+b+","+c+")";
-            PreparedStatement preparedStmt = con.prepareStatement(insertSql);
-            preparedStmt.execute();
-            con.close();
-        } catch (Exception e) {
+            try (Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/coffee_machine", "safa", "1234")) {
+                int a = this.beans.level, b = this.water.level, c = WasteTray.level;
+                String insertSql = "INSERT INTO objects_data (beans_amount,water_amount,wasted_tray) VALUES("+a+","+b+","+c+")";
+                PreparedStatement preparedStmt = con.prepareStatement(insertSql);
+                preparedStmt.execute();
+            }
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
     }
-    
 
-    
     public CoffeeMachine start(){
         
        String sql = "SELECT beans_amount, water_amount, wasted_tray " +
                      "FROM objects_data";
-        
+        CoffeeMachine cm = new CoffeeMachine();
         try {
-             Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/coffee_machine", "safa", "1234");
-             java.sql.Statement stmt  = con.createStatement();
-             ResultSet rs = stmt.executeQuery(sql); 
-           
-            // loop through the result set
-            
-            while (rs.next()) {
-
-                int waterAmount = rs.getInt("water_amount");
-                int beansAmount = rs.getInt("beans_amount");
-                int wastedTrayLevel = rs.getInt("wasted_tray");
-
-                 CoffeeMachine cm = new CoffeeMachine(new WaterCntainer(waterAmount), new BeansContainer(beansAmount), new WasteTray(wastedTrayLevel));
-                 return cm;
-            }
-             rs.close();
-             stmt.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }catch(Exception ex){
+           try (java.sql.Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {   
+               // loop through the result set
+               while (rs.next()) {
+                   
+                   int waterAmount = rs.getInt("water_amount");
+                   int beansAmount = rs.getInt("beans_amount");
+                   int wastedTrayLevel = rs.getInt("wasted_tray");
+                   
+                   cm = new CoffeeMachine(new WaterCntainer(waterAmount),
+                           new BeansContainer(beansAmount), new WasteTray(wastedTrayLevel), this.logger);
+                   return cm;
+               }
+           }
+        } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
     
-        return null;
+       return cm;
     }
  
 

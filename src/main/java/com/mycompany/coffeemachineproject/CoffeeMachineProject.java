@@ -8,11 +8,11 @@ public class CoffeeMachineProject {
 
     public static void main(String[] args) {
 
-        
         Scanner input = new Scanner(System.in);
         CoffeeMachine cm = new CoffeeMachine();
-        cm.stop();
-        cm.start();
+        cm = cm.start();
+        LoggerDatabaise loggerDatabaise = new LoggerDatabaise();
+        cm.setLogger(loggerDatabaise);
         
         String menu = """
                       1. Single Espresso
@@ -58,7 +58,7 @@ public class CoffeeMachineProject {
                 continue;
             }
             if (choice == 5) {
-                // save the data to file
+                cm.stop();
                 System.exit(0);
             }
             int beansAmount =0, waterAmount=0;
@@ -69,6 +69,7 @@ public class CoffeeMachineProject {
                 System.out.println("Enter 1 if you want to clean the  wasted tray, other wise the machine will turn off: ");
                 if (input.nextInt() == 1) {
                     cm.getWasteTray().clean();
+                    cm.getLogger().log("The wasted tray has been cleaned");
                 } else {
                     System.exit(0);
                 }
@@ -85,6 +86,7 @@ public class CoffeeMachineProject {
                 do {
                     try {
                         cm.getBeans().fill(beansAmount);
+                        cm.getLogger().log("The beans container has been added " + beansAmount + "grams of beans");
                         break;
                     } catch (BeansExceededCapacityException e) {
                         System.out.println(e.getMessage());
@@ -96,6 +98,7 @@ public class CoffeeMachineProject {
                 do {
                     try {
                         cm.getWater().fill(waterAmount);
+                        cm.getLogger().log("The water container has been added " + waterAmount + "ml of water");
                         break;
                     } catch (WaterExceededCapacityException e) {
                         System.out.println(e.getMessage());
@@ -106,6 +109,15 @@ public class CoffeeMachineProject {
             System.out.println("The coffee cup has been made successfully!!");
             System.out.println("The caffeine amount in this cup in grams"
                     + " = " + cm.getBeans().getCaffeine(choice));
+            String coffeeType = "";
+            switch (choice) {
+                case 1 -> coffeeType = "Single Espresso";
+                case 2 -> coffeeType = "Double Espresso";
+                case 3 -> coffeeType = "Single Americano";
+                case 4 -> coffeeType = "Double Americano";
+            }
+            cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
+            +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
         } while (true);
     }
 
