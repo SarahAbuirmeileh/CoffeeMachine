@@ -9,6 +9,10 @@ public class WasteTray {
     public WasteTray() {
         this.capacity = 20;
     }
+    public WasteTray(int level) {
+        this.capacity = 20;
+        this.level=level;
+    }//safa
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;

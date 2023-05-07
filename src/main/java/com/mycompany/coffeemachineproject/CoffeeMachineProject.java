@@ -8,8 +8,12 @@ public class CoffeeMachineProject {
 
     public static void main(String[] args) {
 
+        
         Scanner input = new Scanner(System.in);
         CoffeeMachine cm = new CoffeeMachine();
+        cm.stop();
+        cm.start();
+        
         String menu = """
                       1. Single Espresso
                       2. Double Espresso

@@ -13,6 +13,13 @@ public class BeansContainer extends Container {
         arabicaPercentage = 0;
         robustaPercentage = 0;
     }
+    public BeansContainer(int level) {
+        this.capacity = 500;
+        arabicaPercentage = 0;
+        robustaPercentage = 0;
+        this.setLevel(level);
+    }//safa
+    
 
     public BeansContainer(double arabicaPercentage, double robustaPercentage) throws InvalidDataException {
         this.capacity = 500;
