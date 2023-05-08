@@ -94,7 +94,6 @@ public class CoffeeMachine {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/coffee_machine", "safa", "1234");
-<<<<<<< HEAD
              java.sql.Statement stmt  = con.createStatement();
              ResultSet rs = stmt.executeQuery(sql); 
            
@@ -113,7 +112,6 @@ public class CoffeeMachine {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }catch(Exception ex){
-=======
            try (java.sql.Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {   
                // loop through the result set
                while (rs.next()) {
@@ -128,7 +126,6 @@ public class CoffeeMachine {
                }
            }
         } catch (SQLException | ClassNotFoundException ex) {
->>>>>>> e07a60a4e262583492371a73c8f57057a648be86
             System.out.println(ex.getMessage());
         }
     
