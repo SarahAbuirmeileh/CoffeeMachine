@@ -111,7 +111,6 @@ public class CoffeeMachine {
                 int waterAmount = rs.getInt("water_amount");
                 int beansAmount = rs.getInt("beans_amount");
                 int wastedTrayLevel = rs.getInt("wasted_tray");
-
                  CoffeeMachine cm = new CoffeeMachine(new WaterCntainer(waterAmount), new BeansContainer(beansAmount), new WasteTray(wastedTrayLevel));
                  return cm;
             }
