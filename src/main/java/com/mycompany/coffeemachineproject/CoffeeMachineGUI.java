@@ -1,21 +1,20 @@
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CoffeeMachineGUI extends javax.swing.JFrame {
-
+    
     CoffeeMachine cm = new CoffeeMachine();
-
+    LoggerDatabaise loggerDatabaise = new LoggerDatabaise();
+    
     public CoffeeMachineGUI() {
+        cm.stop();
         initComponents();
-        // load the information from file about the containers, then pass them as paramerter to the cm
-        //CoffeeMachine cm = new CoffeeMachine(.....);
-        
+        cm = cm.start();
+        cm.setLogger(loggerDatabaise);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -359,15 +358,20 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dAmericanoRadioButtonActionPerformed
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-      int choice =0;
+        int choice =0;
+        String coffeeType = "";
         if(sEspressoRadioButton.isSelected()){
             choice = 1;
+            coffeeType = "Single Espresso";
         } else if (dEspressoRadioButton.isSelected()){
             choice =2;
+            coffeeType = "Double Espresso";
         }else if (sAmericanoRadioButton.isSelected()){
             choice =3;
+            coffeeType = "Single Americano";
         }else if(dAmericanoRadioButton.isSelected()){
             choice = 4;
+            coffeeType = "Double Americano";
         }
 
         try{
@@ -397,6 +401,13 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             + "The caffeine amount in this cup in grams"
             + " = " + cm.getBeans().getCaffeine(choice));
         
+        cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
+            +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
+        
+        sEspressoRadioButton.setSelected(false);
+        dEspressoRadioButton.setSelected(false);
+        sAmericanoRadioButton.setSelected(false);
+        dAmericanoRadioButton.setSelected(false);
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
@@ -404,6 +415,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "You want to clean your teay?");
         startButton.setEnabled(true);
         WasteTray.level=0;
+        cm.getLogger().log("The wasted tray has been cleaned");
     }//GEN-LAST:event_cleanButtonActionPerformed
 
     private void addBeansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBeansActionPerformed
@@ -433,6 +445,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         finally{
             beansContanierText.setText("");
         }
+        cm.getLogger().log("The beans container has been added " + beansAmount + "grams of beans");
         startButton.setEnabled(true);
     }//GEN-LAST:event_addBeansActionPerformed
 
@@ -464,6 +477,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         finally{
             waterContainerText.setText("");
         }
+        cm.getLogger().log("The water container has been added " + waterAmount + "ml of water");
         startButton.setEnabled(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

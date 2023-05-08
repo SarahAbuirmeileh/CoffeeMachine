@@ -12,9 +12,8 @@ public class WaterCntainer extends Container {
     public WaterCntainer(int level ) {
         this.setLevel(level);
         setCapacity(1000);
-    }//safa
+    }
     
-
     @Override
     public boolean take(int amount) {
         if (level >= amount) {
