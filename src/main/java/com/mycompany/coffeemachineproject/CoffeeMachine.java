@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class CoffeeMachine {
 
+public class CoffeeMachine {
     private WaterCntainer water;
     private BeansContainer beans;
     private Grind grind;
@@ -26,6 +26,7 @@ public class CoffeeMachine {
     public CoffeeMachine(WaterCntainer water, BeansContainer beans, WasteTray wasteTray, Logger logger) {
         this.water = water;
         this.beans = beans;
+        this.grind = new Grind();
         this.wasteTray = wasteTray;
         this.logger=logger;
     }
@@ -75,8 +76,11 @@ public class CoffeeMachine {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/coffee_machine", "safa", "1234")) {
-                int a = this.beans.level, b = this.water.level, c = WasteTray.level;
-                String insertSql = "INSERT INTO objects_data (beans_amount,water_amount,wasted_tray) VALUES("+a+","+b+","+c+")";
+                
+                int a = this.beans.level, b = this.water.getLevel(), c = WasteTray.level; 
+                int d=(int) (this.beans.getArabicaPercentage()*100);
+                int e= (int) (this.beans.getRobustaPercentage()*100);
+                String insertSql = "INSERT INTO objects_data (beans_amount,water_amount,wasted_tray,arabica_percentage,robusta_percentage) VALUES("+a+","+b+","+c+","+d+","+e+")";
                 PreparedStatement preparedStmt = con.prepareStatement(insertSql);
                 preparedStmt.execute();
             }
@@ -85,55 +89,45 @@ public class CoffeeMachine {
         }
     }
 
-    public CoffeeMachine start(){
+    public CoffeeMachine start() {
         
-       String sql = "SELECT beans_amount, water_amount, wasted_tray " +
+   String sql = "SELECT beans_amount, water_amount, wasted_tray,arabica_percentage, robusta_percentage " +
                      "FROM objects_data";
+
         CoffeeMachine cm = new CoffeeMachine();
         try {
+             Class.forName("com.mysql.cj.jdbc.Driver");
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/coffee_machine", "safa", "1234");
-<<<<<<< HEAD
              java.sql.Statement stmt  = con.createStatement();
-             ResultSet rs = stmt.executeQuery(sql); 
-           
-            // loop through the result set
-            
+             ResultSet rs = stmt.executeQuery(sql);
+             
             while (rs.next()) {
-
                 int waterAmount = rs.getInt("water_amount");
                 int beansAmount = rs.getInt("beans_amount");
                 int wastedTrayLevel = rs.getInt("wasted_tray");
-                 CoffeeMachine cm = new CoffeeMachine(new WaterCntainer(waterAmount), new BeansContainer(beansAmount), new WasteTray(wastedTrayLevel));
-                 return cm;
+                cm =new CoffeeMachine(new WaterCntainer(waterAmount), new BeansContainer(beansAmount), new WasteTray(wastedTrayLevel),this.logger);
+                cm.getBeans().setArabicaPercentage(rs.getInt("arabica_percentage"));
+                cm.getBeans().setRobustaPercentage(rs.getInt("robusta_percentage"));
             }
              rs.close();
              stmt.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }catch(Exception ex){
-=======
-           try (java.sql.Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {   
-               // loop through the result set
-               while (rs.next()) {
-                   
-                   int waterAmount = rs.getInt("water_amount");
-                   int beansAmount = rs.getInt("beans_amount");
-                   int wastedTrayLevel = rs.getInt("wasted_tray");
-                   
-                   cm = new CoffeeMachine(new WaterCntainer(waterAmount),
-                           new BeansContainer(beansAmount), new WasteTray(wastedTrayLevel), this.logger);
-                   return cm;
-               }
-           }
-        } catch (SQLException | ClassNotFoundException ex) {
->>>>>>> e07a60a4e262583492371a73c8f57057a648be86
             System.out.println(ex.getMessage());
         }
-    
+
+        
        return cm;
     }
+    
+
+
+    
+   
+
  
 
     public void brewer(int coffeeChoice, int grindLevel) throws WastedTrayException, OutOfBeansException, OutOfWaterException {
@@ -148,7 +142,7 @@ public class CoffeeMachine {
         if (!beansEnough) {
             throw new OutOfBeansException();
         }
-
+        
         boolean waterEnough = false;
         switch (coffeeChoice) {
             case 1, 2 ->
@@ -162,7 +156,7 @@ public class CoffeeMachine {
             throw new OutOfWaterException();
         }
         try {
-            grind.setGringLevle(grindLevel);
+            this.grind.setGringLevle(grindLevel);
         } catch (InvalidDataException ex) {
            // we will set the value after being sure that is sutabile
         }

@@ -5,13 +5,13 @@ import javax.swing.JOptionPane;
 
 public class CoffeeMachineGUI extends javax.swing.JFrame {
     
-    CoffeeMachine cm = new CoffeeMachine();
+    CoffeeMachine cm;
+     CoffeeMachine cm1 = new CoffeeMachine();
     LoggerDatabaise loggerDatabaise = new LoggerDatabaise();
     
     public CoffeeMachineGUI() {
-        cm.stop();
         initComponents();
-        cm = cm.start();
+        cm = cm1.start();
         cm.setLogger(loggerDatabaise);
     }
     
@@ -333,6 +333,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        cm.stop();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -384,30 +385,28 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             Other wise you cannot make your coffee""");
             startButton.setEnabled(false);
         } catch (OutOfBeansException e) {
-            JOptionPane.showMessageDialog(this, "THere is no enough beans, pleas fill it");
+            JOptionPane.showMessageDialog(this, "There is no enough beans, pleas fill it");
             startButton.setEnabled(false);
             return;
         } catch (OutOfWaterException e) {
-            JOptionPane.showMessageDialog(this, "THere is no enough water, pleas fill it");
+            JOptionPane.showMessageDialog(this, "There is no enough water, pleas fill it");
             startButton.setEnabled(false);
             return;
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-
-        JOptionPane.showMessageDialog(this,
-            "The coffee cup has been made successfully!!"
-            + "The caffeine amount in this cup in grams"
-            + " = " + cm.getBeans().getCaffeine(choice));
-        
-        cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
-            +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
-        
         sEspressoRadioButton.setSelected(false);
         dEspressoRadioButton.setSelected(false);
         sAmericanoRadioButton.setSelected(false);
         dAmericanoRadioButton.setSelected(false);
+        JOptionPane.showMessageDialog(this,
+            """
+            The coffee cup has been made successfully!!
+             The caffeine amount in this cup in grams = """ + cm.getBeans().getCaffeine(choice));
+        
+        cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
+            +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
@@ -424,7 +423,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             beansAmount=Integer.parseInt(beansContanierText.getText());
             if (beansAmount < 0) {
                 JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
-                startButton.setEnabled(false); beansContanierText.setText("");
+                beansContanierText.setText("");
                 return;
             }
         } catch (NumberFormatException e) {
@@ -434,17 +433,33 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         }finally{
             beansContanierText.setText("");
         }
+        boolean addPercentage =false;
         try {
             cm.getBeans().fill(beansAmount);
+            addPercentage=true;
         } catch (BeansExceededCapacityException ex) {
             JOptionPane.showMessageDialog(this,"The beans you want to add exceeded the beans container capacity"
             + "You have to enter a positave integer not greater than " 
-            + (cm.getBeans().getCapacity()-cm.getBeans().getLevel()));
+            + (cm.getBeans().getCapacity() - cm.getBeans().getLevel()));
             startButton.setEnabled(false);
         }
         finally{
             beansContanierText.setText("");
         }
+        if (addPercentage){
+            do{
+               try{
+                   cm.getBeans().setArabicaPercentage(Integer.parseInt(JOptionPane.showInputDialog(this,"Enter the arabica percentage% ")));
+                   cm.getBeans().setRobustaPercentage(100-(int)(100*cm.getBeans().getArabicaPercentage()));
+                   break;
+               }catch(NumberFormatException e){
+                   JOptionPane.showMessageDialog(this, "You must enter a positive integer");
+               }catch (InvalidDataException e){
+                   JOptionPane.showMessageDialog(this, "Enter an integer from 0 to 100");
+               }
+           }while(true);
+        }
+        
         cm.getLogger().log("The beans container has been added " + beansAmount + "grams of beans");
         startButton.setEnabled(true);
     }//GEN-LAST:event_addBeansActionPerformed

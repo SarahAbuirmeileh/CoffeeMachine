@@ -6,18 +6,19 @@ public class WaterCntainer extends Container {
 
     // Water level measured in ml
     public WaterCntainer() {
+        super(1000,1000);
         setCapacity(1000);
     }
     
     public WaterCntainer(int level ) {
-        this.setLevel(level);
-        setCapacity(1000);
+        super(level,1000);
+        this.setCapacity(1000);
     }
     
     @Override
     public boolean take(int amount) {
-        if (level >= amount) {
-            setLevel(getLevel() - amount);
+        if (this.getLevel() >= amount) {
+            setLevel(this.getLevel() - amount);
             return true;
         }
         return false;
@@ -25,7 +26,7 @@ public class WaterCntainer extends Container {
 
     @Override
     public String getInfo() {
-        return "Water Container : water levle = " + this.level;
+        return "Water Container : water levle = " + this.getLevel();
     }
 
     @Override
