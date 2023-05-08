@@ -9,19 +9,18 @@ public class BeansContainer extends Container {
     private double robustaPercentage;
 
     public BeansContainer() {
-        this.capacity = 500;
-        arabicaPercentage = 0;
-        robustaPercentage = 0;
+        super(500,500);
+        arabicaPercentage = 0.5;
+        robustaPercentage = 0.5;
     }
     public BeansContainer(int level) {
-        this.capacity = 500;
-        arabicaPercentage = 0;
-        robustaPercentage = 0;
-        this.setLevel(level);
+        super(level,500);
+        arabicaPercentage = 0.5;
+        robustaPercentage = 0.5;
     }
     
     public BeansContainer(double arabicaPercentage, double robustaPercentage) throws InvalidDataException {
-        this.capacity = 500;
+        this.setCapacity(500) ;
         setArabicaPercentage(arabicaPercentage);
         setRobustaPercentage(robustaPercentage);
     }

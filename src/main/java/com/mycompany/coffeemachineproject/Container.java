@@ -6,7 +6,12 @@ public abstract class Container {
     protected int level;
 
     public Container() {
-        this.level = 0;
+        this.level = this.capacity;
+    }
+    
+    public Container(int level, int capacity) {
+        this.level = level;
+        this.capacity=capacity;
     }
 
     public int getCapacity() {
@@ -18,7 +23,7 @@ public abstract class Container {
     }
 
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     public boolean setLevel(int level) {
