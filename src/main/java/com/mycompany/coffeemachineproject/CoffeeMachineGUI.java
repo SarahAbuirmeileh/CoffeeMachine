@@ -1,6 +1,8 @@
 package com.mycompany.coffeemachineproject;
 
 import com.mycompany.coffeemachineproject.Exception.*;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class CoffeeMachineGUI extends javax.swing.JFrame {
@@ -13,8 +15,42 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         initComponents();
         cm = cm1.start();
         cm.setLogger(loggerDatabaise);
+        jLabel10.setText(cm.getBeans().getLevel()+" gram");
+        jLabel9.setText(cm.getWater().getLevel()+" ml");
+        scaleImage();
+        scaleImage2();
+        scaleImage3();
+        scaleImage4();
     }
-    
+  
+    public void scaleImage(){
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\1.png");
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(first.getWidth(), first.getWidth(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        first.setIcon(scaledIcon);
+    }
+    public void scaleImage2(){
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\4.png");
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(second.getWidth(), second.getWidth(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        second.setIcon(scaledIcon);
+    }
+    public void scaleImage3(){
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\3.png");
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(third.getWidth(), third.getWidth(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        third.setIcon(scaledIcon);
+    }
+    public void scaleImage4(){
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\5.png");
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(forth.getWidth(), forth.getWidth(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        forth.setIcon(scaledIcon);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +62,6 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         dAmericanoRadioButton = new javax.swing.JRadioButton();
@@ -38,10 +73,11 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         sAmericanoRadioButton = new javax.swing.JRadioButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        first = new javax.swing.JLabel();
+        third = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
         grindLevelSlide = new javax.swing.JSlider();
-        jLabel22 = new javax.swing.JLabel();
         cleanButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -51,37 +87,50 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        second = new javax.swing.JLabel();
+        forth = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Coffee Machine ");
         setBackground(new java.awt.Color(214, 199, 145));
 
-        jLabel15.setBackground(new java.awt.Color(128, 97, 53));
-        jLabel15.setFont(new java.awt.Font("Andalus", 1, 18)); // NOI18N
-        jLabel15.setText("  Please choose your coffee type: ");
-        jLabel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setBackground(new java.awt.Color(254, 254, 212));
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 3));
 
         jLabel16.setFont(new java.awt.Font("Andalus", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 51, 0));
         jLabel16.setText(" Americano ");
         jLabel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 2));
 
+        dAmericanoRadioButton.setBackground(new java.awt.Color(102, 51, 0));
         buttonGroup1.add(dAmericanoRadioButton);
+        dAmericanoRadioButton.setForeground(new java.awt.Color(102, 51, 0));
         dAmericanoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dAmericanoRadioButtonActionPerformed(evt);
             }
         });
 
+        dEspressoRadioButton.setBackground(new java.awt.Color(102, 51, 0));
         buttonGroup1.add(dEspressoRadioButton);
+        dEspressoRadioButton.setForeground(new java.awt.Color(102, 51, 0));
         dEspressoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dEspressoRadioButtonActionPerformed(evt);
             }
         });
 
+        sEspressoRadioButton.setBackground(new java.awt.Color(102, 51, 0));
         buttonGroup1.add(sEspressoRadioButton);
+        sEspressoRadioButton.setForeground(new java.awt.Color(102, 51, 0));
         sEspressoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sEspressoRadioButtonActionPerformed(evt);
@@ -89,19 +138,24 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         });
 
         jLabel20.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(102, 51, 0));
         jLabel20.setText("  Double   ");
         jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53)));
 
         jLabel17.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(102, 51, 0));
         jLabel17.setText("  Single ");
         jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53)));
 
         jLabel21.setBackground(new java.awt.Color(255, 102, 153));
         jLabel21.setFont(new java.awt.Font("Andalus", 1, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(102, 51, 0));
         jLabel21.setText(" Espresso ");
         jLabel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 2));
 
+        sAmericanoRadioButton.setBackground(new java.awt.Color(102, 51, 0));
         buttonGroup1.add(sAmericanoRadioButton);
+        sAmericanoRadioButton.setForeground(new java.awt.Color(102, 51, 0));
         sAmericanoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sAmericanoRadioButtonActionPerformed(evt);
@@ -109,10 +163,12 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         });
 
         jLabel23.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(102, 51, 0));
         jLabel23.setText("  Double   ");
         jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53)));
 
         jLabel24.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(102, 51, 0));
         jLabel24.setText("  Single ");
         jLabel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53)));
 
@@ -125,22 +181,27 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
-                                .addComponent(sEspressoRadioButton)))
+                                .addComponent(sEspressoRadioButton))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
-                                .addComponent(dEspressoRadioButton))
+                                .addComponent(dEspressoRadioButton)
+                                .addGap(43, 43, 43)
+                                .addComponent(first, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(third, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(jLabel20))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(jLabel21)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,27 +210,35 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel16)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(sAmericanoRadioButton)
                                 .addGap(71, 71, 71)
-                                .addComponent(dAmericanoRadioButton))
-                            .addComponent(jLabel16))
+                                .addComponent(dAmericanoRadioButton)))
                         .addGap(57, 57, 57))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jLabel16))
-                .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sEspressoRadioButton)
-                    .addComponent(dEspressoRadioButton)
-                    .addComponent(sAmericanoRadioButton)
-                    .addComponent(dAmericanoRadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(first, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sEspressoRadioButton)
+                            .addComponent(dEspressoRadioButton)
+                            .addComponent(sAmericanoRadioButton)
+                            .addComponent(dAmericanoRadioButton)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(third, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
@@ -179,18 +248,22 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
                 .addGap(54, 54, 54))
         );
 
+        jButton1.setBackground(new java.awt.Color(102, 51, 0));
         jButton1.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Turn off");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 35), 2));
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        startButton.setBackground(new java.awt.Color(102, 51, 0));
         startButton.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        startButton.setForeground(new java.awt.Color(255, 255, 255));
         startButton.setText("Start");
-        startButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 2));
+        startButton.setBorder(null);
         startButton.setEnabled(false);
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,6 +272,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         });
 
         grindLevelSlide.setBackground(new java.awt.Color(128, 97, 53));
+        grindLevelSlide.setForeground(new java.awt.Color(102, 51, 0));
         grindLevelSlide.setMajorTickSpacing(1);
         grindLevelSlide.setMaximum(10);
         grindLevelSlide.setMinimum(1);
@@ -207,14 +281,11 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         grindLevelSlide.setPaintTicks(true);
         grindLevelSlide.setValue(5);
 
-        jLabel22.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel22.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
-        jLabel22.setText("  Grinde level ");
-        jLabel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
+        cleanButton.setBackground(new java.awt.Color(102, 51, 0));
         cleanButton.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        cleanButton.setForeground(new java.awt.Color(255, 255, 255));
         cleanButton.setText("clean");
-        cleanButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 2));
+        cleanButton.setBorder(null);
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cleanButtonActionPerformed(evt);
@@ -223,18 +294,27 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(119, 117, 94));
         jLabel1.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 51, 0));
         jLabel1.setText("Beans Amount");
 
         jLabel2.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 51, 0));
         jLabel2.setText("Water Container");
 
+        beansContanierText.setBackground(new java.awt.Color(247, 233, 159));
+        beansContanierText.setForeground(new java.awt.Color(102, 51, 0));
+        beansContanierText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 51, 0)));
+
+        waterContainerText.setBackground(new java.awt.Color(247, 233, 159));
+        waterContainerText.setForeground(new java.awt.Color(102, 51, 0));
+        waterContainerText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 51, 0)));
         waterContainerText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 waterContainerTextActionPerformed(evt);
             }
         });
 
-        addBeans.setBackground(new java.awt.Color(128, 97, 53));
+        addBeans.setBackground(new java.awt.Color(102, 51, 0));
         addBeans.setForeground(new java.awt.Color(255, 255, 255));
         addBeans.setText("Add Beans");
         addBeans.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +323,7 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(128, 97, 53));
+        jButton2.setBackground(new java.awt.Color(102, 51, 0));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Add Water");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -252,90 +332,160 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             }
         });
 
+        jSeparator1.setBackground(new java.awt.Color(102, 51, 0));
+        jSeparator1.setForeground(new java.awt.Color(102, 51, 0));
+
+        jSeparator2.setBackground(new java.awt.Color(102, 51, 0));
+        jSeparator2.setForeground(new java.awt.Color(102, 51, 0));
+
+        jLabel18.setFont(new java.awt.Font("Andalus", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 51, 0));
+        jLabel18.setText("  Please choose your coffee type: ");
+        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 2));
+
+        jLabel19.setFont(new java.awt.Font("Andalus", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(102, 51, 0));
+        jLabel19.setText("  Grinde level ");
+        jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 97, 53), 2));
+
+        jLabel7.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 51, 0));
+        jLabel7.setText("Current water:");
+
+        jLabel8.setBackground(new java.awt.Color(119, 117, 94));
+        jLabel8.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 51, 0));
+        jLabel8.setText("Current beans:");
+
+        jLabel9.setBackground(new java.awt.Color(247, 233, 159));
+        jLabel9.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 51, 0));
+
+        jLabel10.setBackground(new java.awt.Color(247, 233, 159));
+        jLabel10.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(102, 51, 0));
+
+        second.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addComponent(jSeparator2)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(beansContanierText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(waterContainerText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addBeans)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(grindLevelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(jLabel22))
+                        .addGap(143, 143, 143)
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(forth, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 10, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(231, 231, 231)
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(beansContanierText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(waterContainerText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addBeans, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jSeparator2)
+            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(second, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(113, 113, 113)
+                                .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)))
+                        .addGap(111, 111, 111))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(grindLevelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel18))
+                    .addComponent(forth, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(grindLevelSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBeans, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beansContanierText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(waterContainerText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addBeans, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(beansContanierText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(waterContainerText, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(second, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,89 +497,39 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        cm.stop();
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void sEspressoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sEspressoRadioButtonActionPerformed
-        // TODO add your handling code here:
-        if (sEspressoRadioButton.isSelected())
-            startButton.setEnabled(true);
-    }//GEN-LAST:event_sEspressoRadioButtonActionPerformed
-
-    private void dEspressoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dEspressoRadioButtonActionPerformed
-        if (dEspressoRadioButton.isSelected())
-            startButton.setEnabled(true);
-    }//GEN-LAST:event_dEspressoRadioButtonActionPerformed
-
-    private void sAmericanoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sAmericanoRadioButtonActionPerformed
-        if(sAmericanoRadioButton.isSelected())
-            startButton.setEnabled(true);
-    }//GEN-LAST:event_sAmericanoRadioButtonActionPerformed
-
-    private void dAmericanoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dAmericanoRadioButtonActionPerformed
-        if(dAmericanoRadioButton.isSelected())
-            startButton.setEnabled(true);
-    }//GEN-LAST:event_dAmericanoRadioButtonActionPerformed
-
-    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        int choice =0;
-        String coffeeType = "";
-        if(sEspressoRadioButton.isSelected()){
-            choice = 1;
-            coffeeType = "Single Espresso";
-        } else if (dEspressoRadioButton.isSelected()){
-            choice =2;
-            coffeeType = "Double Espresso";
-        }else if (sAmericanoRadioButton.isSelected()){
-            choice =3;
-            coffeeType = "Single Americano";
-        }else if(dAmericanoRadioButton.isSelected()){
-            choice = 4;
-            coffeeType = "Double Americano";
-        }
-
-        try{
-            cm.brewer(choice,grindLevelSlide.getValue());
-        }
-        catch (WastedTrayException e) {
-        JOptionPane.showMessageDialog(this, """
-            the wasted tray must be cleaning,
-            If you want to clean it click the clean button,
-            Other wise you cannot make your coffee""");
-            startButton.setEnabled(false);
-        } catch (OutOfBeansException e) {
-            JOptionPane.showMessageDialog(this, "There is no enough beans, pleas fill it");
-            startButton.setEnabled(false);
-            return;
-        } catch (OutOfWaterException e) {
-            JOptionPane.showMessageDialog(this, "There is no enough water, pleas fill it");
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int waterAmount=0;
+        try {
+            waterAmount=Integer.parseInt(waterContainerText.getText());
+            if (waterAmount < 0) {
+                JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
+                startButton.setEnabled(false); waterContainerText.setText("");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
             startButton.setEnabled(false);
             return;
         }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        finally{
+            waterContainerText.setText("");
         }
-        JOptionPane.showMessageDialog(this,
-            """
-            The coffee cup has been made successfully!!
-             The caffeine amount in this cup in grams = """ + cm.getBeans().getCaffeine(choice));
-        
-        cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
-            +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
-        buttonGroup1.clearSelection();
-    }//GEN-LAST:event_startButtonActionPerformed
-
-    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "You want to clean your teay?");
+        try {
+            cm.getWater().fill(waterAmount);
+        } catch (WaterExceededCapacityException ex) {
+            JOptionPane.showMessageDialog(this,"The water you want to add exceeded the water container capacity"
+                + "You have to enter a positave integer not greater than "
+                + (cm.getWater().getCapacity()-cm.getWater().getLevel()));
+            startButton.setEnabled(false);
+        }
+        finally{
+            waterContainerText.setText("");
+        }
+        jLabel9.setText(cm.getWater().getLevel()+" ml");
+        cm.getLogger().log("The water container has been added " + waterAmount + "ml of water");
         startButton.setEnabled(true);
-        WasteTray.level=0;
         cm.stop();
-        cm.getLogger().log("The wasted tray has been cleaned");
-    }//GEN-LAST:event_cleanButtonActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void addBeansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBeansActionPerformed
         int beansAmount=0;
@@ -453,8 +553,8 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
             addPercentage=true;
         } catch (BeansExceededCapacityException ex) {
             JOptionPane.showMessageDialog(this,"The beans you want to add exceeded the beans container capacity"
-            + "You have to enter a positave integer not greater than " 
-            + (cm.getBeans().getCapacity() - cm.getBeans().getLevel()));
+                + "You have to enter a positave integer not greater than "
+                + (cm.getBeans().getCapacity() - cm.getBeans().getLevel()));
             startButton.setEnabled(false);
         }
         finally{
@@ -462,60 +562,112 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         }
         if (addPercentage){
             do{
-               try{
-                   cm.getBeans().setArabicaPercentage(Integer.parseInt(JOptionPane.showInputDialog(this,"Enter the arabica percentage% ")));
-                   cm.getBeans().setRobustaPercentage(100-(int)(100*cm.getBeans().getArabicaPercentage()));
-                   break;
-               }catch(NumberFormatException e){
-                   JOptionPane.showMessageDialog(this, "You must enter a positive integer");
-               }catch (InvalidDataException e){
-                   JOptionPane.showMessageDialog(this, "Enter an integer from 0 to 100");
-               }
-           }while(true);
+                try{
+                    cm.getBeans().setArabicaPercentage(Integer.parseInt(JOptionPane.showInputDialog(this,"Enter the arabica percentage% ")));
+                    cm.getBeans().setRobustaPercentage(100-(int)(100*cm.getBeans().getArabicaPercentage()));
+                    break;
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "You must enter a positive integer");
+                }catch (InvalidDataException e){
+                    JOptionPane.showMessageDialog(this, "Enter an integer from 0 to 100");
+                }
+            }while(true);
         }
         cm.stop();
+        jLabel10.setText(cm.getBeans().getLevel()+" gram");
         cm.getLogger().log("The beans container has been added " + beansAmount + "grams of beans"
-                + "\nthe arabica percantage:" + cm.getBeans().getArabicaPercentage() + " and robusta percantage :"
-                + cm.getBeans().getRobustaPercentage());
+            + "\nthe arabica percantage:" + cm.getBeans().getArabicaPercentage() + " and robusta percantage :"
+            + cm.getBeans().getRobustaPercentage());
         startButton.setEnabled(true);
     }//GEN-LAST:event_addBeansActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            int waterAmount=0;
-        try {
-            waterAmount=Integer.parseInt(waterContainerText.getText());
-            if (waterAmount < 0) {
-                JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
-                startButton.setEnabled(false); waterContainerText.setText("");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "You have to enter a positave integer");
-            startButton.setEnabled(false);
-            return;
-        }
-        finally{
-            waterContainerText.setText("");
-        }
-        try {
-            cm.getWater().fill(waterAmount);
-        } catch (WaterExceededCapacityException ex) {
-            JOptionPane.showMessageDialog(this,"The water you want to add exceeded the water container capacity"
-            + "You have to enter a positave integer not greater than " 
-            + (cm.getWater().getCapacity()-cm.getWater().getLevel()));
-            startButton.setEnabled(false);
-        }
-        finally{
-            waterContainerText.setText("");
-        }
-        cm.getLogger().log("The water container has been added " + waterAmount + "ml of water");
-        startButton.setEnabled(true);
-        cm.stop();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void waterContainerTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waterContainerTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_waterContainerTextActionPerformed
+
+    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, "You want to clean your teay?");
+        startButton.setEnabled(true);
+        WasteTray.level=0;
+        cm.stop();
+        cm.getLogger().log("The wasted tray has been cleaned");
+    }//GEN-LAST:event_cleanButtonActionPerformed
+
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        int choice =0;
+        String coffeeType = "";
+        if(sEspressoRadioButton.isSelected()){
+            choice = 1;
+            coffeeType = "Single Espresso";
+        } else if (dEspressoRadioButton.isSelected()){
+            choice =2;
+            coffeeType = "Double Espresso";
+        }else if (sAmericanoRadioButton.isSelected()){
+            choice =3;
+            coffeeType = "Single Americano";
+        }else if(dAmericanoRadioButton.isSelected()){
+            choice = 4;
+            coffeeType = "Double Americano";
+        }
+
+        try{
+            cm.brewer(choice,grindLevelSlide.getValue());
+        }
+        catch (WastedTrayException e) {
+            JOptionPane.showMessageDialog(this, """
+                the wasted tray must be cleaning,
+                If you want to clean it click the clean button,
+                Other wise you cannot make your coffee""");
+                startButton.setEnabled(false);
+            } catch (OutOfBeansException e) {
+                JOptionPane.showMessageDialog(this, "There is no enough beans, pleas fill it");
+                startButton.setEnabled(false);
+                return;
+            } catch (OutOfWaterException e) {
+                JOptionPane.showMessageDialog(this, "There is no enough water, pleas fill it");
+                startButton.setEnabled(false);
+                return;
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+            JOptionPane.showMessageDialog(this,
+                """
+                The coffee cup has been made successfully!!
+                The caffeine amount in this cup in grams = """ + cm.getBeans().getCaffeine(choice));
+
+                cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, "
+                    +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
+                buttonGroup1.clearSelection();
+    }//GEN-LAST:event_startButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        cm.stop();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void sAmericanoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sAmericanoRadioButtonActionPerformed
+        if(sAmericanoRadioButton.isSelected())
+        startButton.setEnabled(true);
+    }//GEN-LAST:event_sAmericanoRadioButtonActionPerformed
+
+    private void sEspressoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sEspressoRadioButtonActionPerformed
+        // TODO add your handling code here:
+        if (sEspressoRadioButton.isSelected())
+        startButton.setEnabled(true);
+    }//GEN-LAST:event_sEspressoRadioButtonActionPerformed
+
+    private void dEspressoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dEspressoRadioButtonActionPerformed
+        if (dEspressoRadioButton.isSelected())
+        startButton.setEnabled(true);
+    }//GEN-LAST:event_dEspressoRadioButtonActionPerformed
+
+    private void dAmericanoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dAmericanoRadioButtonActionPerformed
+        if(dAmericanoRadioButton.isSelected())
+        startButton.setEnabled(true);
+    }//GEN-LAST:event_dAmericanoRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,26 +711,34 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     private javax.swing.JButton cleanButton;
     private javax.swing.JRadioButton dAmericanoRadioButton;
     private javax.swing.JRadioButton dEspressoRadioButton;
+    private javax.swing.JLabel first;
+    private javax.swing.JLabel forth;
     private javax.swing.JSlider grindLevelSlide;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JRadioButton sAmericanoRadioButton;
     private javax.swing.JRadioButton sEspressoRadioButton;
+    private javax.swing.JLabel second;
     private javax.swing.JButton startButton;
+    private javax.swing.JLabel third;
     private javax.swing.JTextField waterContainerText;
     // End of variables declaration//GEN-END:variables
 }
