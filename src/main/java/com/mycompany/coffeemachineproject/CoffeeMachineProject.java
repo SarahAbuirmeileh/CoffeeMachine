@@ -69,6 +69,7 @@ public class CoffeeMachineProject {
                 System.out.println("Enter 1 if you want to clean the  wasted tray, other wise the machine will turn off: ");
                 if (input.nextInt() == 1) {
                     cm.getWasteTray().clean();
+                    cm.stop();
                     cm.getLogger().log("The wasted tray has been cleaned");
                 } else {
                     System.exit(0);
@@ -86,7 +87,10 @@ public class CoffeeMachineProject {
                 do {
                     try {
                         cm.getBeans().fill(beansAmount);
-                        cm.getLogger().log("The beans container has been added " + beansAmount + "grams of beans");
+                        cm.getLogger().log("The beans container has been added " + beansAmount + "grams of beans"
+                                + "\nthe arabica percantage:" + cm.getBeans().getArabicaPercentage() + " and robusta percantage :"
+                                + cm.getBeans().getRobustaPercentage());
+                        cm.stop();
                         break;
                     } catch (BeansExceededCapacityException e) {
                         System.out.println(e.getMessage());
@@ -99,6 +103,7 @@ public class CoffeeMachineProject {
                     try {
                         cm.getWater().fill(waterAmount);
                         cm.getLogger().log("The water container has been added " + waterAmount + "ml of water");
+                        cm.stop();
                         break;
                     } catch (WaterExceededCapacityException e) {
                         System.out.println(e.getMessage());
@@ -118,6 +123,7 @@ public class CoffeeMachineProject {
             }
             cm.getLogger().log("The" + coffeeType + "cup has been mad successfully, " 
             +"with caffeine amount " + cm.getBeans().getCaffeine(choice) );
+            cm.stop();
         } while (true);
     }
 
