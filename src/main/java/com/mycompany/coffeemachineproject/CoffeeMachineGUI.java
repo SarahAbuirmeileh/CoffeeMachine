@@ -24,28 +24,28 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
     }
   
     public void scaleImage(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\1.png");
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\src\\main\\java\\Icons\\1.png");
         Image img = icon.getImage();
         Image imgScale = img.getScaledInstance(first.getWidth(), first.getWidth(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         first.setIcon(scaledIcon);
     }
     public void scaleImage2(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\4.png");
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\src\\main\\java\\Icons\\4.png");
         Image img = icon.getImage();
         Image imgScale = img.getScaledInstance(second.getWidth(), second.getWidth(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         second.setIcon(scaledIcon);
     }
     public void scaleImage3(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\3.png");
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\src\\main\\java\\Icons\\3.png");
         Image img = icon.getImage();
         Image imgScale = img.getScaledInstance(third.getWidth(), third.getWidth(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
         third.setIcon(scaledIcon);
     }
     public void scaleImage4(){
-        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\5.png");
+        ImageIcon icon = new ImageIcon("C:\\Users\\ساره\\Desktop\\CoffeeMachineProject\\src\\main\\java\\Icons\\5.png");
         Image img = icon.getImage();
         Image imgScale = img.getScaledInstance(forth.getWidth(), forth.getWidth(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -185,8 +185,8 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
                                 .addComponent(sEspressoRadioButton))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(9, 9, 9)
+                                .addComponent(jLabel17)))
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
@@ -204,8 +204,8 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addComponent(jLabel24)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel23)
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -364,8 +364,6 @@ public class CoffeeMachineGUI extends javax.swing.JFrame {
         jLabel10.setBackground(new java.awt.Color(247, 233, 159));
         jLabel10.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 51, 0));
-
-        second.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
